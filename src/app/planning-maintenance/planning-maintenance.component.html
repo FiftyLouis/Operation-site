@@ -1,0 +1,21 @@
+<div>
+  <h1>Planned Maintenance</h1>
+  <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Text</th>
+        <th scope="col">Date of creation</th>
+        <th scope="col">Affected Solutions</th>
+        <th scope="col">scheduled</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr *ngFor="let data of PlannedMaintenance">
+        <td>{{data.text}}</td>
+        <td>{{data.dateofCreation}}</td>
+        <td>{{data.affectedSolutions}}</td>
+        <td>{{data.scheduled}}</td>¨
+      </tr>
+    </tbody>
+  </table>
+</div>

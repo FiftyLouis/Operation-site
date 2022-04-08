@@ -1,0 +1,24 @@
+<div>
+    <h1>Current Issues</h1>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Text</th>
+          <th scope="col">Date of creation</th>
+          <th scope="col">Affected Solutions</th>
+          <th scope="col">ETA</th>
+          <th scope="col">closing</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr *ngFor="let data of currentIssues">
+          <td>{{data.text}}</td>
+          <td>{{data.date}}</td>
+          <td>{{data.affectedSolutions}}</td>
+          <td>{{data.eta}}</td>¨
+          <td>{{data.closing}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
