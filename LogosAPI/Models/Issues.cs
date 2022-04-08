@@ -6,14 +6,14 @@
 
         public DateTime Date { get; set; }
 
-        public String? AffectedSolutions { get; set; }
+        public string AffectedSolutions { get; set; }
 
-        public String? Text { get; set; }
+        public string Text { get; set; }
 
         public DateTime ETA { get; set; }
 
-        public DateTime Solving { get; set; }
+        public DateTime? Solving { get; set; }
 
-        public DateTime Closing { get; set; }
+        public DateTime? Closing { get; set; }
     }
 }

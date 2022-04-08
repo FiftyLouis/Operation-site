@@ -60,6 +60,8 @@ namespace LogosAPI.Controllers
 
             _context.Issues.Remove(issue);
 
+            _context.SaveChanges();
+
             return new JsonResult(Ok(issue));
         }
 
@@ -71,5 +73,65 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(issues);
         }
+
+        //planned Maintenance
+        [HttpPost]
+        public JsonResult CreateEditMaintenance(PlannedMaintenance pm)
+        {
+            if (pm.id == 0)
+            {
+                _context.PlannedMaintenance.Add(pm);
+            }
+            else
+            {
+                var pmInDb = _context.PlannedMaintenance.Find(pm.id);
+                if (pmInDb == null)
+                    return new JsonResult(NotFound());
+                pmInDb = pm;
+            }
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
+
+        [HttpGet]
+        public JsonResult GetPm(int id)
+        {
+            var pm= _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            return new JsonResult(Ok(pm));
+        }
+
+        [HttpDelete]
+        public JsonResult DeletePm(int id)
+        {
+            var pm = _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.PlannedMaintenance.Remove(pm);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
+
+        [HttpGet("/GetAllPm")]
+        public JsonResult GetAllPm()
+        {
+            var pms = _context.PlannedMaintenance.ToList();
+
+            return new JsonResult(pms);
+        }
+
     }
 }

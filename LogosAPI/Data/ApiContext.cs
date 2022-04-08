@@ -7,7 +7,7 @@ namespace LogosAPI.Data
         {
 
             public DbSet<Issues> Issues { get; set; }
-
+            public DbSet<PlannedMaintenance> PlannedMaintenance { get; set; }
 
             public ApiContext(DbContextOptions<ApiContext> options) : base(options)
             {
