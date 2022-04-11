@@ -133,5 +133,78 @@ namespace LogosAPI.Controllers
             return new JsonResult(pms);
         }
 
+//specific function
+
+        //get plannedMaintennace ScheduledDate > currentDate
+        [HttpGet("/GetPmScheduledDate")]
+        public JsonResult GetPmScheduledDate()
+        {
+            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
+
+            foreach (var pm in _context.PlannedMaintenance)
+            {
+               int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
+
+                if(Results > 0)
+                    pms.Add(pm);
+            }
+
+            var orderByPm = from pm in pms
+                            orderby pm.dateofCreation
+                            select pm;
+
+            pms = orderByPm.ToList();
+
+            return new JsonResult(pms);
+        }
+
+
+        //get issues for current issues page
+        [HttpGet("/GetCurrentIssues")]
+        public JsonResult GetCurrentIssues()
+        {
+            List<Issues> issues = new List<Issues>();
+
+            foreach (var issue in _context.Issues)
+            {
+                if(issue.Closing == null)
+                    issues.Add(issue);
+
+            }
+
+            var orderByTimeCreation = from issue in issues
+                                      orderby issue.Date descending
+                                      select issue;
+
+            //issues.OrderByDescending(i => i.Date)
+
+            issues = orderByTimeCreation.ToList();
+
+            return new JsonResult(issues);
+        }
+
+        //get issues for historical issues
+        [HttpGet("/GetHistoricalIssues")]
+        public JsonResult GetHistoricalIssues()
+        {
+            List<Issues> issues = new List<Issues>();
+
+            foreach (var issue in _context.Issues)
+            {
+                if (issue.Closing != null)
+                    issues.Add(issue);
+
+            }
+
+            var orderByTimeCreation = from issue in issues
+                                      orderby issue.Date descending
+                                      select issue;
+
+
+            issues = orderByTimeCreation.ToList();
+
+            return new JsonResult(issues);
+        }
+
     }
 }
