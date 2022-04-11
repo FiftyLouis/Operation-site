@@ -13,18 +13,13 @@ namespace LogosAPI.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        /*    private readonly ApiContext _context;
-
-            public AuthController(ApiContext context)
-            {
-                _context = context;
-            }*/
-        private static User user = new User();
         private readonly IConfiguration configuration;
+        private readonly ApiContext _context;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, ApiContext context)
         {
             this.configuration = configuration;
+            this._context = context;
         }
 
         [HttpPost("/register")]
@@ -32,9 +27,20 @@ namespace LogosAPI.Controllers
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
+            User user = new User();
+            foreach(var u in _context.Users)
+            {
+                if (u.UserName.Equals(request.UserName)) {
+                    return BadRequest("error userName already used");
+                }
+            }
             user.UserName = request.UserName;
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
+            _context.Add(user);
+
+            _context.SaveChanges();
+
 
             return Ok(user);
         }
@@ -42,17 +48,20 @@ namespace LogosAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(UserDto request)
         {
-            if (!user.UserName.Equals(request.UserName))
+
+            foreach(var user in _context.Users)
             {
-                return BadRequest("error username");
+                if (user.UserName.Equals(request.UserName))
+                {
+                    if (VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+                    {
+                        string token = CreateToken(user);
+                        return Ok(token);
+                    }
+                    return BadRequest("error password");
+                }
             }
-            
-            if(!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("error password");
-            }
-            string token = CreateToken(user);
-            return Ok(token);
+            return BadRequest("user not found");
         }
 
         private string CreateToken(User user)
