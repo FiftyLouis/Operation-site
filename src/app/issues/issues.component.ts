@@ -23,11 +23,9 @@ export class IssuesComponent implements OnInit {
   constructor(private dataService : DataService) { }
 
   ngOnInit(): void {
-    this.dataService.getAllIssues().subscribe((data: issues[]) => {
+    this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
       console.log(data);
-      data.forEach((element,index)=>{
-        if(element.closing==null) this.currentIssues.push(element);
-     });
+      this.currentIssues = data;
     })
   }
 

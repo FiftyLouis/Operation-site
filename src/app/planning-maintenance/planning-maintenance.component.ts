@@ -22,7 +22,7 @@ export class PlanningMaintenanceComponent implements OnInit {
   PlannedMaintenance: PM[] = [];
 
   ngOnInit(): void {
-    this.dataService.getAllPm().subscribe((data: PM[]) =>{
+    this.dataService.GetPmScheduledDate().subscribe((data: PM[]) =>{
       console.log(data);
       this.PlannedMaintenance = data;
     })

@@ -16,4 +16,16 @@ export class DataService {
   getAllPm(): Observable<any>{
     return this.httpClient.get(this.API+"/GetAllPm");
   }
+
+  GetPmScheduledDate() : Observable<any> {
+    return this.httpClient.get(this.API+"/GetPmScheduledDate");
+  }
+
+  GetCurrentIssues(): Observable<any> {
+    return this.httpClient.get(this.API+"/GetCurrentIssues");
+  }
+
+  GetHistoricalIssues(): Observable<any>{
+    return this.httpClient.get(this.API+"/GetHistoricalIssues");
+  }
 }
