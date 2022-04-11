@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using LogosAPI.Models;
 using LogosAPI.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LogosAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class LogosController : ControllerBase
     {
         private readonly ApiContext _context;
@@ -136,7 +138,7 @@ namespace LogosAPI.Controllers
 //specific function
 
         //get plannedMaintennace ScheduledDate > currentDate
-        [HttpGet("/GetPmScheduledDate")]
+        [HttpGet("/GetPmScheduledDate"), AllowAnonymous]
         public JsonResult GetPmScheduledDate()
         {
             List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
@@ -160,7 +162,7 @@ namespace LogosAPI.Controllers
 
 
         //get issues for current issues page
-        [HttpGet("/GetCurrentIssues")]
+        [HttpGet("/GetCurrentIssues"), AllowAnonymous]
         public JsonResult GetCurrentIssues()
         {
             List<Issues> issues = new List<Issues>();
@@ -184,7 +186,7 @@ namespace LogosAPI.Controllers
         }
 
         //get issues for historical issues
-        [HttpGet("/GetHistoricalIssues")]
+        [HttpGet("/GetHistoricalIssues"), AllowAnonymous]
         public JsonResult GetHistoricalIssues()
         {
             List<Issues> issues = new List<Issues>();
