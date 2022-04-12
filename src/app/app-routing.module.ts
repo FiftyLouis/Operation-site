@@ -4,6 +4,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { IssuesComponent } from './issues/issues.component';
 import { HistoricalIssuesComponent } from './historical-issues/historical-issues.component';
 import { PlanningMaintenanceComponent } from './planning-maintenance/planning-maintenance.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [];
 
@@ -12,6 +13,7 @@ const routes: Routes = [];
     { path: 'currentIssues', component: IssuesComponent},
     { path: 'historicalIssues', component: HistoricalIssuesComponent},
     { path: 'planningMaintenance', component: PlanningMaintenanceComponent},
+    { path: 'login', component: LoginComponent},
     { path: '**', component: LandingPageComponent}
   ])
 ],
