@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace LogosAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -45,8 +45,8 @@ namespace LogosAPI.Controllers
             return Ok(user);
         }
 
-        [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        [HttpPost("/login")]
+        public JsonResult Login(UserDto request)
         {
 
             foreach(var user in _context.Users)
@@ -56,12 +56,15 @@ namespace LogosAPI.Controllers
                     if (VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                     {
                         string token = CreateToken(user);
-                        return Ok(token);
+                        string[] JsonToken = new string[2];
+                        JsonToken[0] = token;
+                        JsonToken[1] = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm:ss");
+                        return new JsonResult(JsonToken);
                     }
-                    return BadRequest("error password");
+                    return new JsonResult(NotFound("bad password"));
                 }
             }
-            return BadRequest("user not found");
+            return new JsonResult(NotFound("user not found"));
         }
 
         private string CreateToken(User user)
@@ -83,6 +86,7 @@ namespace LogosAPI.Controllers
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
+   
             return jwt;
         }
 

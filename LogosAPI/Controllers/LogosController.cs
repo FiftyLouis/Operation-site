@@ -18,7 +18,7 @@ namespace LogosAPI.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public JsonResult CreateEditIssues(Issues issues)
         {
             if (issues.Id == 0)
@@ -162,7 +162,7 @@ namespace LogosAPI.Controllers
 
 
         //get issues for current issues page
-        [HttpGet("/GetCurrentIssues"), AllowAnonymous]
+        [HttpGet("/GetCurrentIssues")]
         public JsonResult GetCurrentIssues()
         {
             List<Issues> issues = new List<Issues>();
