@@ -5,6 +5,7 @@ import { IssuesComponent } from './issues/issues.component';
 import { HistoricalIssuesComponent } from './historical-issues/historical-issues.component';
 import { PlanningMaintenanceComponent } from './planning-maintenance/planning-maintenance.component';
 import { LoginComponent } from './login/login.component';
+import { HistoricalMaintenanceComponent } from './historical-maintenance/historical-maintenance.component';
 
 const routes: Routes = [];
 
@@ -14,6 +15,7 @@ const routes: Routes = [];
     { path: 'historicalIssues', component: HistoricalIssuesComponent},
     { path: 'planningMaintenance', component: PlanningMaintenanceComponent},
     { path: 'login', component: LoginComponent},
+    { path: 'historicalMaintenance', component: HistoricalMaintenanceComponent},
     { path: '**', component: LandingPageComponent}
   ])
 ],

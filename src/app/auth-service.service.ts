@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import moment from 'moment';
 import { catchError, map, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import { PopLoginComponent } from './pop-login/pop-login.component';
 
 
 @Injectable({
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 export class AuthServiceService {
   private API = "http://localhost:49153";
 
-  constructor(private http: HttpClient, private router: Router) { 
+  constructor(private http: HttpClient, private router: Router, private dialog : MatDialog) { 
   }
 
   ngOnInit(): void {
@@ -22,6 +24,7 @@ export class AuthServiceService {
     this.http.post(this.API+"/login", {userName, password}, { responseType: 'text' })
       .pipe(catchError((err) => {
         console.error(err);
+        this.openDiag();
         return throwError(err);
       })).subscribe(data => {
         console.log(data)
@@ -34,4 +37,9 @@ logout() {
   localStorage.removeItem('currentUser');
   window.location.href="http://localhost:4200"
 }
+
+  openDiag(){
+    this.dialog.open(PopLoginComponent);
+  }
+
 }

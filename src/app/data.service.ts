@@ -28,4 +28,34 @@ export class DataService {
   GetHistoricalIssues(): Observable<any>{
     return this.httpClient.get(this.API+"/GetHistoricalIssues");
   }
+
+  GetCurrentIssuesAdmin(): Observable<any>{
+    return this.httpClient.get(this.API+"/GetCurrentIssuesAdmin");
+  }
+
+  SolvedIssue(id:bigint): Observable<any>{
+    return this.httpClient.post(this.API+"/SolvedIssue", { id });
+  }
+
+  CreateIssue(a:string, t:string, eta:string) : Observable<any>{
+  return this.httpClient.post(this.API+"/CreateIssue", { a, t, eta});
+  }
+
+  GetPmAdmin(): Observable<any>{
+    return this.httpClient.get(this.API+"/GetPmAdmin");
+  }
+
+  DeletePmAdmin(id:bigint): Observable<any>{
+    const url = `http://localhost:49153/DeletePmAdmin?id=${id}`;
+    return this.httpClient.delete(url)
+  }
+
+  CreatePm(a:string, t:string, s:string): Observable<any>{
+    return this.httpClient.post(this.API+"/CreatePm", { a, t, s});
+  }
+
+  GetHistoricalPmAdmin(): Observable<any>{
+    return this.httpClient.get(this.API+"/GetHistoricalPmAdmin");
+  }
+
 }
