@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import moment from 'moment';
+import { AuthServiceService } from '../auth-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  login : any;
+
+  constructor( private auth : AuthServiceService) { }
 
   ngOnInit(): void {
+    console.log(this.login)
+    if(localStorage.key(0)){
+      this.login = true;
+    }else{
+      this.login = false
+    }
   }
 
+  logOut(){
+    this.auth.logout();
+  }
 }
