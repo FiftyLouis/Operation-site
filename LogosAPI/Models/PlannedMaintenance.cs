@@ -1,4 +1,6 @@
-﻿namespace LogosAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace LogosAPI.Models
 {
     public class PlannedMaintenance
     {
@@ -11,5 +13,18 @@
         public string affectedSolutions { get; set; }  
 
         public string text { get; set; }
+
+
+        [JsonConstructor]
+        public PlannedMaintenance() { }
+        
+        public PlannedMaintenance(string a, string t, DateTime scheduled)
+        {
+            this.id = 0;
+            this.dateofCreation = DateTime.Now;
+            this.affectedSolutions = a;
+            this.text = t;
+            this.scheduled = scheduled;
+        }
     }
 }

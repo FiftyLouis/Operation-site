@@ -1,4 +1,6 @@
-﻿namespace LogosAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace LogosAPI.Models
 {
     public class Issues
     {
@@ -15,5 +17,20 @@
         public DateTime? Solving { get; set; }
 
         public DateTime? Closing { get; set; }
+
+
+        [JsonConstructor]
+        public Issues() { }
+
+       public Issues(string a, string t, DateTime eta)
+        {
+            this.Id = 0;
+            this.Date = DateTime.Now;
+            this.AffectedSolutions = a;
+            this.Text = t;
+            this.ETA = eta;
+            this.Solving = null;
+            this.Closing = null;
+        }
     }
 }

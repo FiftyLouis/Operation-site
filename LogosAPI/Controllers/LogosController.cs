@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using LogosAPI.Data;
 using LogosAPI.Models;
-using LogosAPI.Data;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LogosAPI.Controllers
 {
@@ -77,7 +76,7 @@ namespace LogosAPI.Controllers
         }
 
         //planned Maintenance
-        [HttpPost]
+        [HttpPost, AllowAnonymous]
         public JsonResult CreateEditMaintenance(PlannedMaintenance pm)
         {
             if (pm.id == 0)
@@ -162,7 +161,7 @@ namespace LogosAPI.Controllers
 
 
         //get issues for current issues page
-        [HttpGet("/GetCurrentIssues")]
+        [HttpGet("/GetCurrentIssues"), AllowAnonymous]
         public JsonResult GetCurrentIssues()
         {
             List<Issues> issues = new List<Issues>();
@@ -207,6 +206,126 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(issues);
         }
+
+
+        //admin part
+        //edit current issues
+        [HttpGet("/GetCurrentIssuesAdmin")]
+        public JsonResult GetCurrentIssuesAdmin()
+        {
+            List<Issues> issues = new List<Issues>();
+
+            foreach (var issue in _context.Issues)
+            {
+                if (issue.Closing == null)
+                    issues.Add(issue);
+
+            }
+
+            var orderByTimeCreation = from issue in issues
+                                      orderby issue.Date descending
+                                      select issue;
+
+            //issues.OrderByDescending(i => i.Date)
+
+            issues = orderByTimeCreation.ToList();
+
+            return new JsonResult(issues);
+        }
+        [HttpPost("/SolvedIssue")]
+        public JsonResult SolvedIssue(int id)
+        {
+            var issue = _context.Issues.Find(id).Closing = DateTime.Now;
+
+            return new JsonResult(issue);
+
+        }
+
+      [HttpPost("/CreateIssue")]
+        public JsonResult CreateIssue(string AffectedSolutions, string Text, DateTime ETA)
+        {
+            Issues issue = new Issues(AffectedSolutions, Text, ETA);
+            CreateEditIssues(issue);
+
+            return new JsonResult(issue);
+        }
+
+        //edit planned maintenance
+
+        [HttpGet("/GetPmAdmin")]
+        public JsonResult GetPmAdmin()
+        {
+            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
+
+            foreach (var pm in _context.PlannedMaintenance)
+            {
+                int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
+
+                if (Results > 0)
+                    pms.Add(pm);
+            }
+
+            var orderByPm = from pm in pms
+                            orderby pm.dateofCreation
+                            select pm;
+
+            pms = orderByPm.ToList();
+
+            return new JsonResult(pms);
+        }
+
+        [HttpDelete("/DeletePmAdmin")]
+        public JsonResult DeletePmAdmin(int id)
+        {
+            var pm = _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.PlannedMaintenance.Remove(pm);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
+
+        [HttpPost("/CreatePm")]
+        public JsonResult CreatePm(string AffectedSolutions, string Text, DateTime s)
+        {
+             PlannedMaintenance pm = new PlannedMaintenance(AffectedSolutions, Text, s);
+            CreateEditMaintenance(pm);
+
+            return new JsonResult(pm);
+        }
+
+
+        //view historical maintenance
+        [HttpGet("/GetHistoricalPmAdmin")]
+        public JsonResult GetHistoricalPmAdmin()
+        {
+            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
+
+            foreach (var pm in _context.PlannedMaintenance)
+            {
+                int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
+
+                if (Results < 0)
+                    pms.Add(pm);
+            }
+
+            var orderByPm = from pm in pms
+                            orderby pm.dateofCreation descending
+                            select pm;
+
+            pms = orderByPm.ToList();
+
+            return new JsonResult(pms);
+        }
+
+
+
 
     }
 }
