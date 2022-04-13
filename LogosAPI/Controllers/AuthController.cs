@@ -46,7 +46,7 @@ namespace LogosAPI.Controllers
         }
 
         [HttpPost("/login")]
-        public JsonResult Login(UserDto request)
+        public async Task<ActionResult<User>> Login(UserDto request)
         {
 
             foreach(var user in _context.Users)
@@ -56,15 +56,12 @@ namespace LogosAPI.Controllers
                     if (VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
                     {
                         string token = CreateToken(user);
-                        string[] JsonToken = new string[2];
-                        JsonToken[0] = token;
-                        JsonToken[1] = DateTime.Now.AddDays(1).ToString("MM/dd/yyyy HH:mm:ss");
-                        return new JsonResult(JsonToken);
+                        return Ok(token);
                     }
-                    return new JsonResult(NotFound("bad password"));
+                    return BadRequest("bad password");
                 }
             }
-            return new JsonResult(NotFound("user not found"));
+            return  BadRequest("user not found");
         }
 
         private string CreateToken(User user)
