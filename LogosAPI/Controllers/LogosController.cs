@@ -20,13 +20,13 @@ namespace LogosAPI.Controllers
         [HttpPost, AllowAnonymous]
         public JsonResult CreateEditIssues(Issues issues)
         {
-            if (issues.Id == 0)
+            if (issues.id == 0)
             {
                 _context.Issues.Add(issues);
             }
             else
             {
-                var issuesInDb = _context.Issues.Find(issues.Id);
+                var issuesInDb = _context.Issues.Find(issues.id);
                 if (issuesInDb == null)
                     return new JsonResult(NotFound());
                 issuesInDb = issues;
@@ -233,9 +233,20 @@ namespace LogosAPI.Controllers
             return new JsonResult(issues);
         }
         [HttpPost("/SolvedIssue")]
-        public JsonResult SolvedIssue(int id)
+        public JsonResult SolvedIssue(int id, DateTime date)
         {
-            var issue = _context.Issues.Find(id).Closing = DateTime.Now;
+            var issue = _context.Issues.Find(id);
+
+            if (issue == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.Issues.Find(id).Closing = DateTime.Now;
+            _context.Issues.Find(id).Solving = date;
+
+
+            _context.SaveChanges();
 
             return new JsonResult(issue);
 

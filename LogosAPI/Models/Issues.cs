@@ -4,7 +4,7 @@ namespace LogosAPI.Models
 {
     public class Issues
     {
-        public int Id { get; set; }
+        public int id { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -24,7 +24,7 @@ namespace LogosAPI.Models
 
        public Issues(string a, string t, DateTime eta)
         {
-            this.Id = 0;
+            this.id = 0;
             this.Date = DateTime.Now;
             this.AffectedSolutions = a;
             this.Text = t;
