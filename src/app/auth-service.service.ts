@@ -41,4 +41,9 @@ logout() {
   openDiag(){
     this.dialog.open(PopLoginComponent);
   }
+
+logout() {
+  localStorage.removeItem('currentUser');
+  window.location.href="http://localhost:4200"
+}
 }
