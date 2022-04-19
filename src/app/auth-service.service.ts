@@ -11,7 +11,7 @@ import { PopLoginComponent } from './pop-login/pop-login.component';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private API = "http://localhost:49153";
+  private API = "http://localhost:49155";
 
   constructor(private http: HttpClient, private router: Router, private dialog : MatDialog) { 
   }

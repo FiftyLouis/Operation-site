@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DataService } from '../data.service';
 
 interface PM{
@@ -17,7 +18,12 @@ text: string;
 
 export class PlanningMaintenanceComponent implements OnInit {
 
-  constructor(private dataService : DataService) { }
+  modalRef!: BsModalRef;
+  login : any;
+  idRmv!: number;
+
+
+  constructor(private dataService : DataService, private modalService : BsModalService) { }
 
   PlannedMaintenance: PM[] = [];
 
@@ -26,6 +32,25 @@ export class PlanningMaintenanceComponent implements OnInit {
       console.log(data);
       this.PlannedMaintenance = data;
     })
+    if(localStorage.key(0)){
+      this.login = true;
+    }else{
+      this.login = false
+    }
   }
+
+  remove(){
+    this.dataService.DeletePmAdmin(this.idRmv).subscribe((data : PM) => {
+      console.log(data);
+    });
+    window.location.href="http://localhost:4200/planningMaintenance"
+  }
+
+  openModal(template: TemplateRef<any>, id : number) {
+    this.idRmv = id;
+    this.modalRef = this.modalService.show(template);
+ }
+
+
 
 }

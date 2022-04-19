@@ -6,7 +6,7 @@ import { observable, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private API = "http://localhost:49153";
+  private API = "http://localhost:49155";
   constructor(private httpClient: HttpClient) { }
 
   getAllIssues(): Observable<any> {
@@ -33,8 +33,10 @@ export class DataService {
     return this.httpClient.get(this.API+"/GetCurrentIssuesAdmin");
   }
 
-  SolvedIssue(id:bigint): Observable<any>{
-    return this.httpClient.post(this.API+"/SolvedIssue", { id });
+  SolvedIssue(id:number, date: Date): Observable<any>{
+    console.log(id,date);
+    const url = `http://localhost:49155/SolvedIssue?id=${id}&date=${date}`
+    return this.httpClient.post(url, {});
   }
 
   CreateIssue(a:string, t:string, eta:string) : Observable<any>{
@@ -45,8 +47,8 @@ export class DataService {
     return this.httpClient.get(this.API+"/GetPmAdmin");
   }
 
-  DeletePmAdmin(id:bigint): Observable<any>{
-    const url = `http://localhost:49153/DeletePmAdmin?id=${id}`;
+  DeletePmAdmin(id:number): Observable<any>{
+    const url = `http://localhost:49155/DeletePmAdmin?id=${id}`;
     return this.httpClient.delete(url)
   }
 
