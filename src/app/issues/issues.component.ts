@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { AuthServiceService } from '../auth-service.service';
-
 interface issues{
   id: number;
   date: string;
@@ -40,5 +39,7 @@ export class IssuesComponent implements OnInit {
   solving(){
     
   }
+
+
 
 }

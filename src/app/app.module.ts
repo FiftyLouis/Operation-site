@@ -19,8 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopLoginComponent } from './pop-login/pop-login.component';
 import { FormIssuesComponent } from './form-issues/form-issues.component';
 import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.component';
-
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +33,8 @@ import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.co
     HistoricalMaintenanceComponent,
     PopLoginComponent,
     FormIssuesComponent,
-    FormMaintenanceComponent
+    FormMaintenanceComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -44,6 +44,7 @@ import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.co
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    ModalModule.forRoot(),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

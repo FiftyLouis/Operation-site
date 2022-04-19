@@ -3,6 +3,7 @@
     "",
     "\\src",
     "\\src\\app",
+    "\\src\\app\\header",
     "\\src\\app\\issues"
   ],
   "PreviewInSolutionExplorer": false
