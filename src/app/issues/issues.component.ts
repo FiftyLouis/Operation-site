@@ -60,7 +60,4 @@ export class IssuesComponent implements OnInit {
     this.idSolved = id;
     this.modalRef = this.modalService.show(template);
  }
-
-
-
 }

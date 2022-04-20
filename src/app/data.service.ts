@@ -6,7 +6,7 @@ import { observable, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private API = "http://localhost:49155";
+  private API = "http://localhost:49153";
   constructor(private httpClient: HttpClient) { }
 
   getAllIssues(): Observable<any> {
@@ -35,12 +35,13 @@ export class DataService {
 
   SolvedIssue(id:number, date: Date): Observable<any>{
     console.log(id,date);
-    const url = `http://localhost:49155/SolvedIssue?id=${id}&date=${date}`
+    const url = `http://localhost:49153/SolvedIssue?id=${id}&date=${date}`;
     return this.httpClient.post(url, {});
   }
 
   CreateIssue(a:string, t:string, eta:string) : Observable<any>{
-  return this.httpClient.post(this.API+"/CreateIssue", { a, t, eta});
+    const url = `http://localhost:49153/CreateIssue?AffectedSolutions=${a}&Text=${t}&ETA=${eta}`;
+    return this.httpClient.post(url, {});
   }
 
   GetPmAdmin(): Observable<any>{
@@ -48,12 +49,13 @@ export class DataService {
   }
 
   DeletePmAdmin(id:number): Observable<any>{
-    const url = `http://localhost:49155/DeletePmAdmin?id=${id}`;
+    const url = `http://localhost:49153/DeletePmAdmin?id=${id}`;
     return this.httpClient.delete(url)
   }
 
   CreatePm(a:string, t:string, s:string): Observable<any>{
-    return this.httpClient.post(this.API+"/CreatePm", { a, t, s});
+    const url = `http://localhost:49153/CreatePm?AffectedSolutions=${a}&Text=${t}&s=${s}`;
+    return this.httpClient.post(url, {});
   }
 
   GetHistoricalPmAdmin(): Observable<any>{

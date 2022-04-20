@@ -22,8 +22,7 @@ import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.co
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -40,7 +39,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     PopLoginComponent,
     FormIssuesComponent,
     FormMaintenanceComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -53,6 +51,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ModalModule.forRoot(),
     MatDatepickerModule,
     MatFormFieldModule,
+    MatNativeDateModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

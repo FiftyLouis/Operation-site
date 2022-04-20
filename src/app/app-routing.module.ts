@@ -6,6 +6,8 @@ import { HistoricalIssuesComponent } from './historical-issues/historical-issues
 import { PlanningMaintenanceComponent } from './planning-maintenance/planning-maintenance.component';
 import { LoginComponent } from './login/login.component';
 import { HistoricalMaintenanceComponent } from './historical-maintenance/historical-maintenance.component';
+import { FormIssuesComponent } from './form-issues/form-issues.component';
+import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.component';
 
 const routes: Routes = [];
 
@@ -16,7 +18,9 @@ const routes: Routes = [];
     { path: 'planningMaintenance', component: PlanningMaintenanceComponent},
     { path: 'login', component: LoginComponent},
     { path: 'historicalMaintenance', component: HistoricalMaintenanceComponent},
-    { path: '**', component: LandingPageComponent}
+    { path: 'currentIssues/formIssue', component: FormIssuesComponent},
+    { path: 'planningMaintenance/formMaintenance', component : FormMaintenanceComponent},
+    { path: '**', component: LandingPageComponent},
   ])
 ],
   exports: [RouterModule]

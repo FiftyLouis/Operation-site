@@ -26,6 +26,8 @@
 <ng-container *ngIf="login">
   <div>
     <h1>Edit Current Issues</h1>
+    <a href="currentIssues/formIssue" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">add issue</a>
+    <br> <br>
     <table class="table table-dark">
       <thead>
         <tr>
@@ -63,7 +65,7 @@
     <form [formGroup]="DateForm" (ngSubmit)="solving()">
       <input 
           formControlName="date"
-          type="text"
+          type="date"
           class="datepicker_input form-control border-2"
           id="datepicker1"
           required

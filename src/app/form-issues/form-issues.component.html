@@ -1,1 +1,22 @@
-<p>form-issues works!</p>
+<form [formGroup]="IssueForm" (ngSubmit)="save()">
+    <div class="form-group">
+        <label>Affected Solutions</label>
+        <textarea class="form-control" formControlName="AffectedSolutions" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Text</label>
+        <textarea class="form-control" formControlName="Text" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+        <label>ETA</label>
+        <input 
+          formControlName="eta"
+          type="date"
+          class="datepicker_input form-control border-2"
+          id="datepicker1"
+          required
+          placeholder="YYYY-MM-DD">
+    </div>
+    <button>save</button>
+</form>
+
