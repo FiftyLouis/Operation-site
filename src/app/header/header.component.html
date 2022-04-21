@@ -1,93 +1,120 @@
-
+<!--if not login-->
 <ng-container *ngIf="!login">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container">
-      <!-- Navbar brand -->
-      <a class="navbar-brand me-2" href="">
-        <img src="assets/img/logo.png"
-             height="40"
-             alt="MDB Logo"
-             loading="lazy"
-             style="margin-top: -1px;" />
-      </a>
-  
-      <!-- Toggle button -->
-      <button class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarButtonsExample"
-              aria-controls="navbarButtonsExample"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarButtonsExample">
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <a class="nav-link" href="currentIssues">Current issues</a>
-          <a class="nav-link" href="historicalIssues">Historical issues</a>
-          <a class="nav-link" href="planningMaintenance">Planned maintenance</a>
-        </ul>
-        <!-- Left links -->
-  
-        <div class="d-flex align-items-center">
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="navbar-brand me-2" href="">
+                <img src="assets/img/logo.png"
+                     height="40"
+                     alt="MDB Logo"
+                     loading="lazy"
+                     style="margin-top: -1px;" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="currentIssues">Current issues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="historicalIssues">Historical issues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="planningMaintenance">Planned maintenance</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex align-items-right">
           <a href="login" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
-  
         </div>
       </div>
-      <!-- Collapsible wrapper -->
+    </nav>
+    <!-- Navbar -->
+      <!-- Background image -->
+      <div
+      class="img"
+      style="
+        background-image: url('../../assets/img/LogosHeader.jpg');
+        height: 400px;
+        margin-top: 58px;
+      "
+    >
     </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
- </ng-container>
- <ng-container *ngIf="login">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container">
-      <!-- Navbar brand -->
-      <a class="navbar-brand me-2" href="">
-        <img src="assets/img/logo.png"
-             height="40"
-             alt="MDB Logo"
-             loading="lazy"
-             style="margin-top: -1px;" />
-      </a>
-      <H1>Administration View</H1>
-      <!-- Toggle button -->
-      <button class="navbar-toggler"
-              type="button"
-              data-mdb-toggle="collapse"
-              data-mdb-target="#navbarButtonsExample"
-              aria-controls="navbarButtonsExample"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-  
-      <!-- Collapsible wrapper -->
-      <div class="collapse navbar-collapse" id="navbarButtonsExample">
-        <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <a class="nav-link" href="currentIssues">Edit current issues</a>
-          <a class="nav-link" href="historicalIssues">View historical issues</a>
-          <a class="nav-link" href="planningMaintenance">Edit planned maintenance</a>
-          <a class="nav-link" href="historicalMaintenance">View historical maintenance</a>
-        </ul>
-        <!-- Left links -->
-  
-        <div class="d-flex align-items-center">
-          <button type="button" class="btn btn-primary" (click)="logOut()">Log out</button>
-  
-        </div>
-      </div>
-      <!-- Collapsible wrapper -->
-    </div>
-    <!-- Container wrapper -->
-  </nav>
- </ng-container>
+<!-- Background image -->
+  </header>
+</ng-container>
 
-  
+<!--if login-->
+<ng-container *ngIf="login">
+  <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-mdb-toggle="collapse"
+          data-mdb-target="#navbarExample01"
+          aria-controls="navbarExample01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item active">
+              <a class="navbar-brand me-2" href="">
+                <img src="assets/img/logo.png"
+                     height="40"
+                     alt="MDB Logo"
+                     loading="lazy"
+                     style="margin-top: -1px;" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="currentIssues">Edit current issues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="historicalIssues">View historical issues</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="planningMaintenance">Edit planned maintenance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="historicalMaintenance">View historical maintenance</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex align-items-right">
+          <button type="button" class="btn btn-primary" (click)="logOut()">Log out</button>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar -->
+      <!-- Background image -->
+      <div
+      class="img"
+      style="
+        background-image: url('../../assets/img/LogosHeader.jpg');
+        height: 400px;
+        margin-top: 58px;
+      "
+    >
+    </div>
+  <!-- Background image -->
+  </header>
+</ng-container>
