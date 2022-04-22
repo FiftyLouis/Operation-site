@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import moment from 'moment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 
 
@@ -16,6 +17,7 @@ import moment from 'moment';
 })
 export class LoginComponent implements OnInit {
 
+  result! : string;
 
   loginForm = new FormGroup({
     userName: new FormControl(),
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private auth : AuthServiceService, private router: Router) {
+  constructor(private auth : AuthServiceService, private router: Router, private modalService : BsModalService) {
    }
 
   ngOnInit(): void {
@@ -32,11 +34,7 @@ export class LoginComponent implements OnInit {
 
   loginUser(){
     const val = this.loginForm.value;
-    var result : any = this.auth.login(val.userName, val.password);
-    if(result){
-      window.location.href="http://localhost:49153"
-    }
-
-
+    this.auth.login(val.userName, val.password);
   }
+  
 }

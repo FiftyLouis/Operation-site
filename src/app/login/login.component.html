@@ -1,7 +1,15 @@
-<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-    <input type="text" placeholder="enter user Name" formControlName="userName">
-    <br> <br>
-    <input type="password" placeholder="enter password" formControlName="password">
-    <br> <br>
-    <button>login</button>
-</form>
+
+<body class="text-center">
+    <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <img class="mb-4" src="../../assets/img/logo.png" alt="logo logos" width="200" height="80">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in to connect to admin Dashboard</h1>
+      <br>
+      <input type="text" id="inputEmail" class="form-control" placeholder="User Name" required="" autofocus="" formControlName="userName">
+      <br>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" formControlName="password">
+      <br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <p class="mt-5 mb-3 text-muted">© 2022</p>
+    </form>
+</body>
+
