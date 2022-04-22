@@ -1,25 +1,35 @@
-<div>
-  <h1>Historical Issues</h1>
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Text</th>
-        <th scope="col">Date of creation</th>
-        <th scope="col">Affected Solutions</th>
-        <th scope="col">ETA</th>
-        <th scope="col">closing</th>
-        <th scope="col">solving</th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr *ngFor="let data of HistoricalIssues">
-        <td>{{data.text}}</td>
-        <td>{{data.date}}</td>
-        <td>{{data.affectedSolutions}}</td>
-        <td>{{data.eta}}</td>¨
-        <td>{{data.closing}}</td>
-        <td>{{data.solving}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<main role="main"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group mr-2">
+      </div>
+    </div>
+  </div>
+
+  <h2>List of Historical issues</h2>
+  <div class="table-responsive">
+    <table class="table align-middle">
+      <thead>
+        <tr class="bg-primary" style="color:white;">
+          <th scope="col">Text</th>
+          <th scope="col">Date of creation</th>
+          <th scope="col">Affected Solutions</th>
+          <th scope="col">ETA</th>
+          <th scope="col">closing</th>
+          <th scope="col">solving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of HistoricalIssues">
+          <td>{{data.text}}</td>
+          <td>{{data.date}}</td>
+          <td>{{data.affectedSolutions}}</td>
+          <td>{{data.eta}}</td>
+          <td>{{data.closing}}</td>
+          <td>{{data.solving}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>

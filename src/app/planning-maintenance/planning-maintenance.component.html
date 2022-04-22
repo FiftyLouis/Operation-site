@@ -1,53 +1,74 @@
 <ng-container *ngIf="!login">
-  <div>
-    <h1>Planned Maintenance</h1>
-    <table class="table table-dark">
-      <thead>
-        <tr>
-          <th scope="col">Text</th>
-          <th scope="col">Date of creation</th>
-          <th scope="col">Affected Solutions</th>
-          <th scope="col">scheduled</th>
-        </tr>
-      </thead>
-      <tbody>
-       <tr *ngFor="let data of PlannedMaintenance">
-          <td>{{data.text}}</td>
-          <td>{{data.dateofCreation}}</td>
-          <td>{{data.affectedSolutions}}</td>
-          <td>{{data.scheduled}}</td>¨
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <main role="main"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Dashboard</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+        </div>
+      </div>
+    </div>
+  
+    <h2>List of Planned Maintenance</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr class="bg-primary" style="color:white;">
+            <th scope="col">Text</th>
+            <th scope="col">Date of creation</th>
+            <th scope="col">Affected Solutions</th>
+            <th scope="col">scheduled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of PlannedMaintenance">
+            <td>{{data.text}}</td>
+            <td>{{data.dateofCreation}}</td>
+            <td>{{data.affectedSolutions}}</td>
+            <td>{{data.scheduled}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 </ng-container>
 
 <ng-container *ngIf="login">
-<div>
-  <h1>Edit Planned Maintenance</h1>
-  <a href="planningMaintenance/formMaintenance" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">add maintenance</a>
-    <br> <br>
-  <table class="table table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Text</th>
-        <th scope="col">Date of creation</th>
-        <th scope="col">Affected Solutions</th>
-        <th scope="col">scheduled</th>
-      </tr>
-    </thead>
-    <tbody>
-     <tr *ngFor="let data of PlannedMaintenance">
-        <td>{{data.text}}</td>
-        <td>{{data.dateofCreation}}</td>
-        <td>{{data.affectedSolutions}}</td>
-        <td>{{data.scheduled}}</td>
-        <td><button type="button" class="btn btn-primary" (click)="openModal(template, data.id)">remove</button></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+  <main role="main"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+      <h1 class="h2">Dashboard</h1>
+      <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+          <a href="planningMaintenance/formMaintenance" class="btn btn-sm btn-outline-secondary" role="button">add maintenance</a>
+        </div>
+      </div>
+    </div>
+  
+    <h2>List of Planned Maintenance</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr class="bg-primary" style="color:white;">
+            <th scope="col">Text</th>
+            <th scope="col">Date of creation</th>
+            <th scope="col">Affected Solutions</th>
+            <th scope="col">scheduled</th>
+            <th scope="col">remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of PlannedMaintenance">
+            <td>{{data.text}}</td>
+            <td>{{data.dateofCreation}}</td>
+            <td>{{data.affectedSolutions}}</td>
+            <td>{{data.scheduled}}</td>
+            <td><button type="button" class="btn btn-danger" (click)="openModal(template, data.id)">remove</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 </ng-container>
+
 <ng-template #template>
   <div class="modal-header">
      <h4 class="modal-title pull-left">Solving</h4>
@@ -57,9 +78,10 @@
   </div>
   <div class="modal-body">
     Are you sure you want to remove this maintenance ?
-    <button type="button" class="btn btn-primary" (click)="remove()">remove</button>
+    <button type="button" class="btn btn-danger" (click)="remove()">remove</button>
   </div>
   <div class="modal-footer">
      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
   </div>
 </ng-template>
+
