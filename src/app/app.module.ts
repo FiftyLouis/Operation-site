@@ -23,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    NgChartsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

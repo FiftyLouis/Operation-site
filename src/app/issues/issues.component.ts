@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 interface issues{
   id: number;
@@ -33,13 +33,29 @@ export class IssuesComponent implements OnInit {
     date: new FormControl(),
   })
 
+  chartIssue: number[] = [];
+  barChartData: ChartDataset[] | undefined;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    backgroundColor: 'blue',
+  };
+  public barChartLabels  = ['1 day', '7 days', '30 days', 'more'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
+
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
   ngOnInit(): void {
     this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
       console.log(data);
       this.currentIssues = data;
-    })
+    });
+    this.dataService.GetChartIssue().subscribe(data =>{
+      console.log(data);
+      this.chartIssue = data;
+      this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
+    });
     console.log(this.login)
     if(localStorage.key(0)){
       this.login = true;
@@ -60,4 +76,5 @@ export class IssuesComponent implements OnInit {
     this.idSolved = id;
     this.modalRef = this.modalService.show(template);
  }
+ 
 }

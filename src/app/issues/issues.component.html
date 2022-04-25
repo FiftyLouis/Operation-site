@@ -35,9 +35,14 @@
       </div>
     </div>
   </div>
+    <canvas baseChart id="myChart" style="display: block; height: 580px; width: 1375px;"
+      [datasets]="barChartData"
+      [labels]="barChartLabels"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend">
+    </canvas>
 
-
-  <h2>List issues</h2>
   <div class="table-responsive">
     <table class="table align-middle">
       <thead>

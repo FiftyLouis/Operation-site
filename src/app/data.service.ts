@@ -62,4 +62,7 @@ export class DataService {
     return this.httpClient.get(this.API+"/GetHistoricalPmAdmin");
   }
 
+  GetChartIssue(): Observable<any>{
+    return this.httpClient.get(this.API+"/GetChartIssue");
+  }
 }
