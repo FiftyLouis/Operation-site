@@ -65,4 +65,8 @@ export class DataService {
   GetChartIssue(): Observable<any>{
     return this.httpClient.get(this.API+"/GetChartIssue");
   }
+
+  GetChartPm(): Observable<any>{
+    return this.httpClient.get(this.API+("/GetChartPm"));
+  }
 }

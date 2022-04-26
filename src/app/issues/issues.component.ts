@@ -33,7 +33,7 @@ export class IssuesComponent implements OnInit {
     date: new FormControl(),
   })
 
-  chartIssue: number[] = [];
+
   barChartData: ChartDataset[] | undefined;
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -51,14 +51,13 @@ export class IssuesComponent implements OnInit {
       console.log(data);
       this.currentIssues = data;
     });
-    this.dataService.GetChartIssue().subscribe(data =>{
-      console.log(data);
-      this.chartIssue = data;
-      this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
-    });
     console.log(this.login)
     if(localStorage.key(0)){
       this.login = true;
+      this.dataService.GetChartIssue().subscribe(data =>{
+        console.log(data);
+        this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
+      });
     }else{
       this.login = false
     }

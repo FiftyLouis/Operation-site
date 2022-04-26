@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DataService } from '../data.service';
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 interface PM{
 id:number
@@ -22,6 +23,15 @@ export class PlanningMaintenanceComponent implements OnInit {
   login : any;
   idRmv!: number;
 
+  barChartData: ChartDataset[] | undefined;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    backgroundColor: 'blue',
+  };
+  public barChartLabels  = ['1 day', '7 days', '30 days', 'more'];
+  public barChartType: ChartType = 'bar';
+  public barChartLegend = true;
+  public barChartPlugins = [];
 
   constructor(private dataService : DataService, private modalService : BsModalService) { }
 
@@ -34,6 +44,10 @@ export class PlanningMaintenanceComponent implements OnInit {
     })
     if(localStorage.key(0)){
       this.login = true;
+      this.dataService.GetChartPm().subscribe( data => {
+        console.log(data);
+        this.barChartData = [{ data: data, label:'Schedulled'}];
+      })
     }else{
       this.login = false
     }
