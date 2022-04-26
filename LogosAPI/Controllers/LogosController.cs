@@ -375,6 +375,48 @@ namespace LogosAPI.Controllers
             return new JsonResult(tab);
         }
 
+        [HttpGet("/GetIssueToday")]
+        public JsonResult GetIssueToday()
+        {
+            List<Issues> issueToday = new List<Issues>();
+
+            foreach(var issue in _context.Issues)
+            {
+                if(DateTime.Compare(issue.Date, DateTime.Today) >= 0)
+                        issueToday.Add(issue);
+            }
+
+            return new JsonResult(issueToday);
+        }
+
+        [HttpGet("/GetIssueWeek")]
+        public JsonResult GetIssueWeek()
+        {
+            List<Issues> issueWeek = new List<Issues>();
+
+            foreach (var issue in _context.Issues)
+            {
+                if (DateTime.Compare(issue.Date, DateTime.Today.AddDays(-7)) >= 0)
+                    issueWeek.Add(issue);
+            }
+
+            return new JsonResult(issueWeek);
+        }
+
+        [HttpGet("/GetIssueMonth")]
+        public JsonResult GetIssueMonth()
+        {
+            List<Issues> issueMonth = new List<Issues>();
+
+            foreach (var issue in _context.Issues)
+            {
+                if (DateTime.Compare(issue.Date, DateTime.Today.AddDays(-30)) >= 0)
+                    issueMonth.Add(issue);
+            }
+
+            return new JsonResult(issueMonth);
+        }
+
 
 
 
