@@ -144,9 +144,9 @@ namespace LogosAPI.Controllers
 
             foreach (var pm in _context.PlannedMaintenance)
             {
-               int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
+               int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddDays(-1));
 
-                if(Results > 0)
+                if(Results >= 0)
                     pms.Add(pm);
             }
 
@@ -275,7 +275,7 @@ namespace LogosAPI.Controllers
 
             foreach (var pm in _context.PlannedMaintenance)
             {
-                int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
+                int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddDays(-1));
 
                 if (Results < 0)
                     pms.Add(pm);
