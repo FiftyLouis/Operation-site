@@ -93,7 +93,6 @@ export class IssuesComponent implements OnInit {
   this.currentIssues.forEach((element, index) => {
     var d = Date.parse(element.date);
     if(d.valueOf() < date.valueOf()){
-      console.log("test");
       this.currentIssues.splice(index);
     }
   })
@@ -114,7 +113,6 @@ export class IssuesComponent implements OnInit {
   this.currentIssues.forEach((element, index) => {
     var d = Date.parse(element.date);
     if(d.valueOf() < date.valueOf()){
-      console.log("test");
       this.currentIssues.splice(index);
     }
   })
@@ -135,7 +133,6 @@ export class IssuesComponent implements OnInit {
   this.currentIssues.forEach((element, index) => {
     var d = Date.parse(element.date);
     if(d.valueOf() < date.valueOf()){
-      console.log("test");
       this.currentIssues.splice(index);
     }
   })
@@ -177,7 +174,6 @@ export class IssuesComponent implements OnInit {
       data[3]++;
     }
   });
-  console.log(data);
   this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
 }
 }

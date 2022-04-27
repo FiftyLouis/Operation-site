@@ -40,6 +40,10 @@ export class PlanningMaintenanceComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.GetPmScheduledDate().subscribe((data: PM[]) =>{
       console.log(data);
+      data.forEach(element => {
+        element.dateofCreation = element.dateofCreation.split("T")[0];
+        element.scheduled = element.scheduled.split("T")[0];
+      })
       this.PlannedMaintenance = data;
     })
     if(localStorage.key(0)){
@@ -63,6 +67,23 @@ export class PlanningMaintenanceComponent implements OnInit {
   openModal(template: TemplateRef<any>, id : number) {
     this.idRmv = id;
     this.modalRef = this.modalService.show(template);
+ }
+ 
+
+ TodayPm(){
+  //TODO
+ }
+
+ WeekPm(){
+  //TODO
+ }
+
+ MonthPm(){
+  //TODO
+ }
+
+ All(){
+   //TODO
  }
 
 
