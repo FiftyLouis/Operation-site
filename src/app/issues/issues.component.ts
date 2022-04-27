@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 
 interface issues{
   id: number;
@@ -49,15 +50,16 @@ export class IssuesComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
       console.log(data);
+      data.forEach( element => {
+        element.date = element.date.split("T")[0];
+        element.eta = element.eta.split("T")[0];
+      })
       this.currentIssues = data;
     });
     console.log(this.login)
     if(localStorage.key(0)){
       this.login = true;
-      this.dataService.GetChartIssue().subscribe(data =>{
-        console.log(data);
-        this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
-      });
+      this.setDataChart();
     }else{
       this.login = false
     }
@@ -75,5 +77,107 @@ export class IssuesComponent implements OnInit {
     this.idSolved = id;
     this.modalRef = this.modalService.show(template);
  }
- 
+
+ TodayIssue(){
+  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
+    console.log(data);
+    data.forEach( element => {
+      element.date = element.date.split("T")[0];
+      element.eta = element.eta.split("T")[0];
+    })
+    this.currentIssues = data;
+  });
+  var date = new Date()
+  date.setDate(date.getDate()-1);
+
+  this.currentIssues.forEach((element, index) => {
+    var d = Date.parse(element.date);
+    if(d.valueOf() < date.valueOf()){
+      console.log("test");
+      this.currentIssues.splice(index);
+    }
+  })
+  this.setDataChart();
+ }
+
+ WeekIssue(){
+  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
+    console.log(data);
+    data.forEach( element => {
+      element.date = element.date.split("T")[0];
+      element.eta = element.eta.split("T")[0];
+    })
+    this.currentIssues = data;
+  });
+  var date = new Date()
+  date.setDate(date.getDate()-7);
+  this.currentIssues.forEach((element, index) => {
+    var d = Date.parse(element.date);
+    if(d.valueOf() < date.valueOf()){
+      console.log("test");
+      this.currentIssues.splice(index);
+    }
+  })
+  this.setDataChart();
+ }
+
+ MonthIssue(){
+  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
+    console.log(data);
+    data.forEach( element => {
+      element.date = element.date.split("T")[0];
+      element.eta = element.eta.split("T")[0];
+    })
+    this.currentIssues = data;
+  });
+  var date = new Date()
+  date.setDate(date.getDate()-30);
+  this.currentIssues.forEach((element, index) => {
+    var d = Date.parse(element.date);
+    if(d.valueOf() < date.valueOf()){
+      console.log("test");
+      this.currentIssues.splice(index);
+    }
+  })
+  this.setDataChart();
+ }
+
+ All(){
+  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
+    console.log(data);
+    data.forEach( element => {
+      element.date = element.date.split("T")[0];
+      element.eta = element.eta.split("T")[0];
+    })
+    this.currentIssues = data;
+  });
+  this.setDataChart();
+ }
+
+ setDataChart(){
+  let data: number[] = [0, 0, 0, 0];
+  this.currentIssues.forEach(element => {
+    var d = Date.parse(element.eta);
+    var day = new Date();
+    day.setDate(day.getDate()+1);
+    var week = new Date();
+    week.setDate(week.getDate()+7);
+    var month = new Date();
+    month.setDate(month.getDate()+30);
+    if(d.valueOf() <= day.valueOf()){
+      data[0]++;
+    }
+    else if(d.valueOf() <= week.valueOf()){
+      data[1]++;
+    }
+    else if(d.valueOf() <= month.valueOf()){
+      data[2]++;
+    }
+    else{
+      data[3]++;
+    }
+  });
+  console.log(data);
+  this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
+}
 }

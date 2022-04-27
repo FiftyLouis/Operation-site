@@ -29,10 +29,6 @@ export class DataService {
     return this.httpClient.get(this.API+"/GetHistoricalIssues");
   }
 
-  GetCurrentIssuesAdmin(): Observable<any>{
-    return this.httpClient.get(this.API+"/GetCurrentIssuesAdmin");
-  }
-
   SolvedIssue(id:number, date: Date): Observable<any>{
     console.log(id,date);
     const url = `http://localhost:49153/SolvedIssue?id=${id}&date=${date}`;
@@ -42,10 +38,6 @@ export class DataService {
   CreateIssue(a:string, t:string, eta:string) : Observable<any>{
     const url = `http://localhost:49153/CreateIssue?AffectedSolutions=${a}&Text=${t}&ETA=${eta}`;
     return this.httpClient.post(url, {});
-  }
-
-  GetPmAdmin(): Observable<any>{
-    return this.httpClient.get(this.API+"/GetPmAdmin");
   }
 
   DeletePmAdmin(id:number): Observable<any>{
@@ -60,10 +52,6 @@ export class DataService {
 
   GetHistoricalPmAdmin(): Observable<any>{
     return this.httpClient.get(this.API+"/GetHistoricalPmAdmin");
-  }
-
-  GetChartIssue(): Observable<any>{
-    return this.httpClient.get(this.API+"/GetChartIssue");
   }
 
   GetChartPm(): Observable<any>{
