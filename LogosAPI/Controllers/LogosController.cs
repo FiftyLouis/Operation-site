@@ -209,29 +209,7 @@ namespace LogosAPI.Controllers
 
 
         //admin part
-        //edit current issues
-        [HttpGet("/GetCurrentIssuesAdmin")]
-        public JsonResult GetCurrentIssuesAdmin()
-        {
-            List<Issues> issues = new List<Issues>();
 
-            foreach (var issue in _context.Issues)
-            {
-                if (issue.Closing == null)
-                    issues.Add(issue);
-
-            }
-
-            var orderByTimeCreation = from issue in issues
-                                      orderby issue.Date descending
-                                      select issue;
-
-            //issues.OrderByDescending(i => i.Date)
-
-            issues = orderByTimeCreation.ToList();
-
-            return new JsonResult(issues);
-        }
         [HttpPost("/SolvedIssue")]
         public JsonResult SolvedIssue(int id, DateTime date)
         {
@@ -261,29 +239,6 @@ namespace LogosAPI.Controllers
             return new JsonResult(issue);
         }
 
-        //edit planned maintenance
-
-        [HttpGet("/GetPmAdmin")]
-        public JsonResult GetPmAdmin()
-        {
-            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
-
-            foreach (var pm in _context.PlannedMaintenance)
-            {
-                int Results = DateTime.Compare(pm.scheduled, DateTime.Now);
-
-                if (Results > 0)
-                    pms.Add(pm);
-            }
-
-            var orderByPm = from pm in pms
-                            orderby pm.dateofCreation
-                            select pm;
-
-            pms = orderByPm.ToList();
-
-            return new JsonResult(pms);
-        }
 
         [HttpDelete("/DeletePmAdmin")]
         public JsonResult DeletePmAdmin(int id)
@@ -336,26 +291,6 @@ namespace LogosAPI.Controllers
         }
 
 
-        [HttpGet("/GetChartIssue")]
-        public JsonResult GetChartIssue()
-        {
-
-            int[] tab = { 0, 0, 0, 0 };
-            foreach (var issue in _context.Issues)
-            {
-                if (DateTime.Compare(issue.ETA, DateTime.Today.AddDays(1)) <= 0)
-                    tab[0]++;
-                else if (DateTime.Compare(issue.ETA, DateTime.Today.AddDays(7)) <= 0)
-                    tab[1]++;
-                else if (DateTime.Compare(issue.ETA, DateTime.Today.AddDays(30)) <= 0)
-                    tab[2]++;
-                else if (DateTime.Compare(issue.ETA, DateTime.Today.AddDays(30)) > 0)
-                    tab[3]++;
-            }
-
-            return new JsonResult(tab); 
-        }
-
         [HttpGet("/GetChartPm")]
         public JsonResult GetChartPm()
         {
@@ -374,50 +309,6 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(tab);
         }
-
-        [HttpGet("/GetIssueToday")]
-        public JsonResult GetIssueToday()
-        {
-            List<Issues> issueToday = new List<Issues>();
-
-            foreach(var issue in _context.Issues)
-            {
-                if(DateTime.Compare(issue.Date, DateTime.Today) >= 0)
-                        issueToday.Add(issue);
-            }
-
-            return new JsonResult(issueToday);
-        }
-
-        [HttpGet("/GetIssueWeek")]
-        public JsonResult GetIssueWeek()
-        {
-            List<Issues> issueWeek = new List<Issues>();
-
-            foreach (var issue in _context.Issues)
-            {
-                if (DateTime.Compare(issue.Date, DateTime.Today.AddDays(-7)) >= 0)
-                    issueWeek.Add(issue);
-            }
-
-            return new JsonResult(issueWeek);
-        }
-
-        [HttpGet("/GetIssueMonth")]
-        public JsonResult GetIssueMonth()
-        {
-            List<Issues> issueMonth = new List<Issues>();
-
-            foreach (var issue in _context.Issues)
-            {
-                if (DateTime.Compare(issue.Date, DateTime.Today.AddDays(-30)) >= 0)
-                    issueMonth.Add(issue);
-            }
-
-            return new JsonResult(issueMonth);
-        }
-
-
 
 
     }
