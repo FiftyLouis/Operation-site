@@ -48,7 +48,15 @@ export class IssuesComponent implements OnInit {
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
   ngOnInit(): void {
-    this.All();
+    this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
+      console.log(data);
+      data.forEach( element => {
+        element.date = element.date.split("T")[0];
+        element.eta = element.eta.split("T")[0];
+      })
+      this.currentIssues = data;
+    });
+    this.barChartData = [{ data: [0,0,0,0], label: 'Estimated Time of Arrival'}]
     if(localStorage.key(0)){
       this.login = true;
     }else{
@@ -78,8 +86,8 @@ export class IssuesComponent implements OnInit {
       element.eta = element.eta.split("T")[0];
     })
     this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
+    this.setDataChar();
   });
-  this.setDataChart();
  }
 
  All(){
@@ -91,10 +99,10 @@ export class IssuesComponent implements OnInit {
     })
     this.currentIssues = data;
   });
-  this.setDataChart();
+  this.setDataChar();
  }
 
- setDataChart(){
+ setDataChar() {
   let data: number[] = [0, 0, 0, 0];
   this.currentIssues.forEach(element => {
     var d = Date.parse(element.eta);

@@ -79,8 +79,8 @@ export class PlanningMaintenanceComponent implements OnInit {
       element.scheduled = element.scheduled.split("T")[0];
     });
     this.PlannedMaintenance = data;
+    this.setChartPm();
   })
-  this.setChartPm();
  }
 
  setChartPm(){
