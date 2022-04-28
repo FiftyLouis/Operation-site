@@ -291,25 +291,5 @@ namespace LogosAPI.Controllers
         }
 
 
-        [HttpGet("/GetChartPm")]
-        public JsonResult GetChartPm()
-        {
-            int[] tab = { 0, 0, 0, 0 };
-            foreach(var pm in _context.PlannedMaintenance)
-            {
-                if (DateTime.Compare(pm.scheduled, DateTime.Today.AddDays(1)) <= 0)
-                    tab[0]++;
-                else if (DateTime.Compare(pm.scheduled, DateTime.Today.AddDays(7)) <= 0)
-                    tab[1]++;
-                else if (DateTime.Compare(pm.scheduled, DateTime.Today.AddDays(30)) <= 0)
-                    tab[2]++;
-                else if (DateTime.Compare(pm.scheduled, DateTime.Today.AddDays(30)) > 0)
-                    tab[3]++;
-            }
-
-            return new JsonResult(tab);
-        }
-
-
     }
 }
