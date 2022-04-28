@@ -53,8 +53,4 @@ export class DataService {
   GetHistoricalPmAdmin(): Observable<any>{
     return this.httpClient.get(this.API+"/GetHistoricalPmAdmin");
   }
-
-  GetChartPm(): Observable<any>{
-    return this.httpClient.get(this.API+("/GetChartPm"));
-  }
 }

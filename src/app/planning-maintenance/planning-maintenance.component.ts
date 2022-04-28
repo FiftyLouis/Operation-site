@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DataService } from '../data.service';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { elementAt } from 'rxjs';
 
 interface PM{
 id:number
@@ -38,20 +39,9 @@ export class PlanningMaintenanceComponent implements OnInit {
   PlannedMaintenance: PM[] = [];
 
   ngOnInit(): void {
-    this.dataService.GetPmScheduledDate().subscribe((data: PM[]) =>{
-      console.log(data);
-      data.forEach(element => {
-        element.dateofCreation = element.dateofCreation.split("T")[0];
-        element.scheduled = element.scheduled.split("T")[0];
-      })
-      this.PlannedMaintenance = data;
-    })
+    this.All();
     if(localStorage.key(0)){
       this.login = true;
-      this.dataService.GetChartPm().subscribe( data => {
-        console.log(data);
-        this.barChartData = [{ data: data, label:'Schedulled'}];
-      })
     }else{
       this.login = false
     }
@@ -70,21 +60,54 @@ export class PlanningMaintenanceComponent implements OnInit {
  }
  
 
- TodayPm(){
-  //TODO
- }
-
- WeekPm(){
-  //TODO
- }
-
- MonthPm(){
-  //TODO
+ TodayPm(int:number){
+  var date = new Date();
+  date.setDate(date.getDate()-int);
+  this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
+    data.forEach((element, index)=> {
+      element.dateofCreation = element.dateofCreation.split("T")[0];
+      element.scheduled = element.scheduled.split("T")[0];
+    });
+    this.PlannedMaintenance = data.filter(element => Date.parse(element.dateofCreation).valueOf() >= date.valueOf());
+  });
  }
 
  All(){
-   //TODO
+  this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
+    data.forEach((element, index)=> {
+      element.dateofCreation = element.dateofCreation.split("T")[0];
+      element.scheduled = element.scheduled.split("T")[0];
+    });
+    this.PlannedMaintenance = data;
+  })
+  this.setChartPm();
  }
+
+ setChartPm(){
+  let data: number[] = [0,0,0,0,];
+  this.PlannedMaintenance.forEach(element => {
+   var d = Date.parse(element.scheduled);
+   var day = new Date();
+   day.setDate(day.getDate()+1);
+   var week = new Date();
+   week.setDate(week.getDate()+7);
+   var month = new Date();
+   month.setDate(month.getDate()+30);
+   if(d.valueOf() <= day.valueOf()){
+     data[0]++;
+   }
+   else if(d.valueOf() <= week.valueOf()){
+     data[1]++;
+   }
+   else if(d.valueOf() <= month.valueOf()){
+     data[2]++;
+   }
+   else{
+     data[3]++;
+   }
+  });
+  this.barChartData = [{ data : data, label: 'Scheduled Time'}];
+}
 
 
 

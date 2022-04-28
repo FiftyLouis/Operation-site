@@ -48,18 +48,9 @@ export class IssuesComponent implements OnInit {
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
   ngOnInit(): void {
-    this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-      console.log(data);
-      data.forEach( element => {
-        element.date = element.date.split("T")[0];
-        element.eta = element.eta.split("T")[0];
-      })
-      this.currentIssues = data;
-    });
-    console.log(this.login)
+    this.All();
     if(localStorage.key(0)){
       this.login = true;
-      this.setDataChart();
     }else{
       this.login = false
     }
@@ -78,64 +69,16 @@ export class IssuesComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
  }
 
- TodayIssue(){
+ TodayIssue(int:number){
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-    console.log(data);
+    var date = new Date()
+    date.setDate(date.getDate()-int);
     data.forEach( element => {
       element.date = element.date.split("T")[0];
       element.eta = element.eta.split("T")[0];
     })
-    this.currentIssues = data;
+    this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
   });
-  var date = new Date()
-  date.setDate(date.getDate()-1);
-
-  this.currentIssues.forEach((element, index) => {
-    var d = Date.parse(element.date);
-    if(d.valueOf() < date.valueOf()){
-      this.currentIssues.splice(index);
-    }
-  })
-  this.setDataChart();
- }
-
- WeekIssue(){
-  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-    console.log(data);
-    data.forEach( element => {
-      element.date = element.date.split("T")[0];
-      element.eta = element.eta.split("T")[0];
-    })
-    this.currentIssues = data;
-  });
-  var date = new Date()
-  date.setDate(date.getDate()-7);
-  this.currentIssues.forEach((element, index) => {
-    var d = Date.parse(element.date);
-    if(d.valueOf() < date.valueOf()){
-      this.currentIssues.splice(index);
-    }
-  })
-  this.setDataChart();
- }
-
- MonthIssue(){
-  this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-    console.log(data);
-    data.forEach( element => {
-      element.date = element.date.split("T")[0];
-      element.eta = element.eta.split("T")[0];
-    })
-    this.currentIssues = data;
-  });
-  var date = new Date()
-  date.setDate(date.getDate()-30);
-  this.currentIssues.forEach((element, index) => {
-    var d = Date.parse(element.date);
-    if(d.valueOf() < date.valueOf()){
-      this.currentIssues.splice(index);
-    }
-  })
   this.setDataChart();
  }
 
