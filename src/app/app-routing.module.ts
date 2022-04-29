@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { HistoricalMaintenanceComponent } from './historical-maintenance/historical-maintenance.component';
 import { FormIssuesComponent } from './form-issues/form-issues.component';
 import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.component';
+import { DetailIssueComponent } from './detail-issue/detail-issue.component';
+import { DetailPmComponent } from './detail-pm/detail-pm.component';
 
 const routes: Routes = [];
 
@@ -20,6 +22,8 @@ const routes: Routes = [];
     { path: 'historicalMaintenance', component: HistoricalMaintenanceComponent},
     { path: 'currentIssues/formIssue', component: FormIssuesComponent},
     { path: 'planningMaintenance/formMaintenance', component : FormMaintenanceComponent},
+    { path: 'detailIssue', component: DetailIssueComponent},
+    { path: 'detailPm', component: DetailPmComponent},
     { path: '**', component: LandingPageComponent},
   ])
 ],

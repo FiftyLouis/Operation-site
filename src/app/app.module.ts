@@ -24,6 +24,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgChartsModule } from 'ng2-charts';
+import { DetailIssueComponent } from './detail-issue/detail-issue.component';
+import { DetailPmComponent } from './detail-pm/detail-pm.component';
 
 
 @NgModule({
@@ -40,6 +42,8 @@ import { NgChartsModule } from 'ng2-charts';
     PopLoginComponent,
     FormIssuesComponent,
     FormMaintenanceComponent,
+    DetailIssueComponent,
+    DetailPmComponent,
   ],
   imports: [
     BrowserModule,
