@@ -22,8 +22,8 @@ const routes: Routes = [];
     { path: 'historicalMaintenance', component: HistoricalMaintenanceComponent},
     { path: 'currentIssues/formIssue', component: FormIssuesComponent},
     { path: 'planningMaintenance/formMaintenance', component : FormMaintenanceComponent},
-    { path: 'detailIssue', component: DetailIssueComponent},
-    { path: 'detailPm', component: DetailPmComponent},
+    { path: 'currentIssues/detailIssue/:id', component: DetailIssueComponent},
+    { path: 'planningMaintenance/detailPm/:id', component: DetailPmComponent},
     { path: '**', component: LandingPageComponent},
   ])
 ],

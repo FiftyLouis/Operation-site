@@ -53,4 +53,14 @@ export class DataService {
   GetHistoricalPmAdmin(): Observable<any>{
     return this.httpClient.get(this.API+"/GetHistoricalPmAdmin");
   }
+
+  GetIssues(id :number): Observable<any> {
+    const url = `http://localhost:49153/GetIssues?id=${id}`;
+    return this.httpClient.get(url);
+  }
+
+  GetPm(id: number): Observable<any> {
+    const url = `http://localhost:49153/GetPm?id=${id}`;
+    return this.httpClient.get(url,)
+  }
 }

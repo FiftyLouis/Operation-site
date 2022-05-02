@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of HistoricalIssues">
-          <td>{{data.text}}</td>
+          <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.text}}</a></td>
           <td>{{data.date}}</td>
           <td>{{data.affectedSolutions}}</td>
           <td>{{data.eta}}</td>

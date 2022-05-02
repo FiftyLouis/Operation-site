@@ -68,7 +68,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of PlannedMaintenance">
-                <td>{{data.text}}</td>
+                <td><a [routerLink]="['/planningMaintenance/detailPm', data.id]">{{data.text}}</a></td>
                 <td>{{data.dateofCreation}}</td>
                 <td>{{data.affectedSolutions}}</td>
                 <td>{{data.scheduled}}</td>
@@ -153,7 +153,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let data of PlannedMaintenance">
-                <td>{{data.text}}</td>
+                <td><a [routerLink]="['/planningMaintenance/detailPm', data.id]">{{data.text}}</a></td>
                 <td>{{data.dateofCreation}}</td>
                 <td>{{data.affectedSolutions}}</td>
                 <td>{{data.scheduled}}</td>

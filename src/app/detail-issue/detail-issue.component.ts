@@ -1,4 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import { ActivatedRoute } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
+
+interface issues{
+  id: number;
+  date: string;
+  affectedSolutions: string;
+  text: string;
+  eta: string;
+  solving: string;
+  closing: string;
+}
 
 @Component({
   selector: 'app-detail-issue',
@@ -7,9 +20,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailIssueComponent implements OnInit {
 
-  constructor() { }
+  issues: issues;
+  id : number;
+
+  constructor(private dataService: DataService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      var p = params.get("id");
+      if(!isNaN(Number(p))){
+        this.id = Number(p);
+      }else {
+        console.log("not a number !");
+      }
+    });
+    this.dataService.GetIssues(this.id).subscribe( data => {
+      console.log(data);
+    })
   }
 
 }

@@ -43,7 +43,7 @@ export class IssuesComponent implements OnInit {
   public barChartLabels  = ['1 day', '7 days', '30 days', 'more'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  public barChartPlugins = [];
+  public barChartPlugins: any = [];
 
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
