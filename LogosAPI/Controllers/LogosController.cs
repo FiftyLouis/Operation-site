@@ -38,7 +38,7 @@ namespace LogosAPI.Controllers
         }
 
         //get
-        [HttpGet]
+        [HttpGet("/GetIssues"), AllowAnonymous]
         public JsonResult GetIssues(int id)
         {
             var issues = _context.Issues.Find(id);
@@ -96,7 +96,7 @@ namespace LogosAPI.Controllers
             return new JsonResult(Ok(pm));
         }
 
-        [HttpGet]
+        [HttpGet("/GetPm"), AllowAnonymous]
         public JsonResult GetPm(int id)
         {
             var pm= _context.PlannedMaintenance.Find(id);
@@ -289,7 +289,5 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(pms);
         }
-
-
     }
 }
