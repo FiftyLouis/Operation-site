@@ -36,7 +36,14 @@ export class DetailIssueComponent implements OnInit {
     });
     this.dataService.GetIssues(this.id).subscribe( data => {
       console.log(data);
+      this.issues = data.value;
+      this.issues.eta = this.reformatDate(this.issues.eta.split('T')[0]);
     })
+  }
+
+  reformatDate(s : string){
+    const result = s.split('-').reverse();
+    return result.join('/');
   }
 
 }

@@ -2,6 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
 
+interface PM{
+  id:number
+  dateofCreation:string;
+  scheduled: string;
+  affectedSolutions: string;
+  text: string;
+  }
 @Component({
   selector: 'app-detail-pm',
   templateUrl: './detail-pm.component.html',
@@ -10,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailPmComponent implements OnInit {
 
   id : number;
+  PM : PM;
 
   constructor(private dataService: DataService, private router: ActivatedRoute) { }
 
@@ -25,7 +33,14 @@ export class DetailPmComponent implements OnInit {
     })
     this.dataService.GetPm(this.id).subscribe(data => {
       console.log(data);
+      this.PM = data.value;
+      this.PM.scheduled = this.reformatDate(this.PM.scheduled.split('T')[0]);
     })
+  }
+
+  reformatDate(s : string){
+    const result = s.split('-').reverse();
+    return result.join('/');
   }
 
 }
