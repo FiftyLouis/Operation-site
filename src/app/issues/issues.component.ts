@@ -48,15 +48,7 @@ export class IssuesComponent implements OnInit {
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
   ngOnInit(): void {
-    this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-      console.log(data);
-      data.forEach( element => {
-        element.date = element.date.split("T")[0];
-        element.eta = element.eta.split("T")[0];
-      })
-      this.currentIssues = data;
-    });
-    this.barChartData = [{ data: [0,0,0,0], label: 'Estimated Time of Arrival'}]
+    this.All();
     if(localStorage.key(0)){
       this.login = true;
     }else{
@@ -78,6 +70,7 @@ export class IssuesComponent implements OnInit {
  }
 
  TodayIssue(int:number){
+   //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     var date = new Date()
     date.setDate(date.getDate()-int);
@@ -85,21 +78,34 @@ export class IssuesComponent implements OnInit {
       element.date = element.date.split("T")[0];
       element.eta = element.eta.split("T")[0];
     })
+    //filter and set data chart
     this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
     this.setDataChar();
+    //formated date
+    this.currentIssues.forEach( element =>{
+      element.date = this.reformatDate(element.date);
+      element.eta = this.reformatDate(element.eta);
+    })
   });
  }
 
  All(){
+   //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     console.log(data);
     data.forEach( element => {
       element.date = element.date.split("T")[0];
       element.eta = element.eta.split("T")[0];
-    })
+    });
+    //set data and data chart
     this.currentIssues = data;
+    this.setDataChar();
+    //formated date
+    this.currentIssues.forEach( element =>{
+      element.date = this.reformatDate(element.date);
+      element.eta = this.reformatDate(element.eta);
+    });
   });
-  this.setDataChar();
  }
 
  setDataChar() {
@@ -127,4 +133,10 @@ export class IssuesComponent implements OnInit {
   });
   this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
 }
+
+reformatDate(s : string){
+  const result = s.split('-').reverse();
+  return result.join('/');
+}
+
 }

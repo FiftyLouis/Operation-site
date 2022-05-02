@@ -24,7 +24,18 @@ export class HistoricalIssuesComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.GetHistoricalIssues().subscribe((data: issues[]) => {
       console.log(data);
+      data.forEach((element : issues) => {
+        element.date = this.reformatDate(element.date.split('T')[0]);
+        element.eta = this.reformatDate(element.eta.split('T')[0]);
+        element.solving = this.reformatDate(element.solving.split('T')[0]);
+        element.closing = this.reformatDate(element.closing.split('T')[0]);
+      })
       this.HistoricalIssues = data;
     })
+  }
+
+  reformatDate(s : string){
+    const result = s.split('-').reverse();
+    return result.join('/');
   }
 }
