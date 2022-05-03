@@ -16,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './Interceptor';
 import { HistoricalMaintenanceComponent } from './historical-maintenance/historical-maintenance.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PopLoginComponent } from './pop-login/pop-login.component';
 import { FormIssuesComponent } from './form-issues/form-issues.component';
 import { FormMaintenanceComponent } from './form-maintenance/form-maintenance.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -39,7 +38,6 @@ import { DetailPmComponent } from './detail-pm/detail-pm.component';
     LandingPageComponent,
     LoginComponent,
     HistoricalMaintenanceComponent,
-    PopLoginComponent,
     FormIssuesComponent,
     FormMaintenanceComponent,
     DetailIssueComponent,

@@ -42,5 +42,4 @@ export class DetailPmComponent implements OnInit {
     const result = s.split('-').reverse();
     return result.join('/');
   }
-
 }

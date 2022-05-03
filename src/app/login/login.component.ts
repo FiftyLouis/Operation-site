@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     password: new FormControl(),
   })
 
-
+  modalRef : BsModalRef;
+  @ViewChild('template') modal : TemplateRef<any>;
 
   constructor(private auth : AuthServiceService, private router: Router, private modalService : BsModalService) {
    }
@@ -34,7 +35,16 @@ export class LoginComponent implements OnInit {
 
   loginUser(){
     const val = this.loginForm.value;
-    this.auth.login(val.userName, val.password);
+    this.auth.login(val.userName, val.password)
+    .pipe(catchError((err) => {
+      console.error(err);
+      this.modalRef = this.modalService.show(this.modal);
+      return throwError(err);
+    })).subscribe(data => {
+      console.log(data)
+      localStorage.setItem('currentUser', data);
+      window.location.href="http://localhost:4200"
+    });
   }
   
 }
