@@ -289,5 +289,120 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(pms);
         }
+
+
+        //modif issue text
+        [HttpPost("/editTextIssue")]
+        public JsonResult editTextIssue(int id, string t)
+        {
+            var issue = _context.Issues.Find(id);
+
+            if(issue == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.Issues.Find(id).Text = t;
+            issue = _context.Issues.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(issue));
+        }
+
+        //edit issue solutions
+        [HttpPost("/editSolutionIssue")]
+        public JsonResult editSolutionIssue(int id, string s)
+        {
+            var issue = _context.Issues.Find(id);
+
+            if (issue == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.Issues.Find(id).AffectedSolutions = s;
+            issue = _context.Issues.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(issue));
+        }
+
+        //edit eta issue
+        [HttpPost("/editEtaIssue")]
+        public JsonResult editEtaIssue(int id , DateTime date)
+        {
+            var issue = _context.Issues.Find(id);
+
+            if (issue == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.Issues.Find(id).ETA = date;
+            issue = _context.Issues.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(issue));
+        }
+
+        //modif pm text
+        [HttpPost("/editTextPm")]
+        public JsonResult editTextPm(int id, string t)
+        {
+            var pm = _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.PlannedMaintenance.Find(id).text = t;
+            pm = _context.PlannedMaintenance.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
+
+        //modif pm solutions
+        [HttpPost("/editSolutionPm")]
+        public JsonResult editSolutionPm(int id, string t)
+        {
+            var pm = _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.PlannedMaintenance.Find(id).affectedSolutions = t;
+            pm = _context.PlannedMaintenance.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
+
+        //modif pm solutions
+        [HttpPost("/editScheduledPm")]
+        public JsonResult editScheduledPm(int id, DateTime date)
+        {
+            var pm = _context.PlannedMaintenance.Find(id);
+
+            if (pm == null)
+            {
+                return new JsonResult(NotFound());
+            }
+
+            _context.PlannedMaintenance.Find(id).scheduled = date;
+            pm = _context.PlannedMaintenance.Find(id);
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(pm));
+        }
     }
 }

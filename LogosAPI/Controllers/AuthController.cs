@@ -64,6 +64,23 @@ namespace LogosAPI.Controllers
             return  BadRequest("user not found");
         }
 
+        [HttpDelete("/DeleteUser")]
+        public JsonResult DeleteUser(string userName)
+        {
+            foreach(var user in _context.Users)
+            {
+                if (user.UserName.Equals(userName))
+                {
+                    _context.Remove(user);
+
+                    _context.SaveChanges();
+
+                    return new JsonResult(Ok(user));
+                }
+            }
+            return new JsonResult(NotFound("user not found"));
+        }
+
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
