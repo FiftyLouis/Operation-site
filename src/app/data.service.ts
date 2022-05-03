@@ -63,4 +63,19 @@ export class DataService {
     const url = `http://localhost:49153/GetPm?id=${id}`;
     return this.httpClient.get(url,)
   }
+
+  editTextIssue(id : number, text :string): Observable<any> {
+    const url = `http://localhost:49153/editTextIssue?id=${id}&t=${text}`;
+    return this.httpClient.post(url, {});
+  }
+
+  editSolutionIssue(id : number, text :string): Observable<any> {
+    const url = `http://localhost:49153/editSolutionIssue?id=${id}&s=${text}`;
+    return this.httpClient.post(url, {});
+  }
+
+  editEtaIssue(id : number, eta :string): Observable<any> {
+    const url = `http://localhost:49153/editEtaIssue?id=${id}&date=${eta}`;
+    return this.httpClient.post(url, {});
+  }
 }

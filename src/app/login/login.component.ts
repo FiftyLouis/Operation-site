@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   result! : string;
 
   loginForm = new FormGroup({
-    userName: new FormControl(),
-    password: new FormControl(),
+    userName: new FormControl('', [Validators.required]),
+    password: new FormControl('', [ Validators.required]),
   })
 
   modalRef : BsModalRef;
