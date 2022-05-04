@@ -78,4 +78,19 @@ export class DataService {
     const url = `http://localhost:49153/editEtaIssue?id=${id}&date=${eta}`;
     return this.httpClient.post(url, {});
   }
+
+  editTextPm(id : number, text :string): Observable<any> {
+    const url = this.API +`/editTextPm?id=${id}&t=${text}`;
+    return this.httpClient.post(url, {});
+  }
+
+  editSolutionPm( id : number, text : string){
+    const url = this.API +`/editSolutionPm?id=${id}&t=${text}`;
+    return this.httpClient.post(url, {});
+  }
+
+  editScheduledPm(id : number, date :string): Observable<any>{
+    const url = this.API +`/editScheduledPm?id=${id}&date=${date}`;
+    return this.httpClient.post(url, {});
+  }
 }

@@ -6,9 +6,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
           <h2>Description</h2>
           <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words. {{PM.text}}</p>
-          <a href="#" class="btn btn-primary">
-            Primary button
-          </a>
+          <button type="button" class="btn btn-primary" (click)="openModal(template1)">Change description</button>
         </div>
       </div>
       <div class="col d-flex align-items-start">
@@ -18,9 +16,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
           <h2>Affected Solutions</h2>
           <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.{{PM.affectedSolutions}}</p>
-          <a href="#" class="btn btn-primary">
-            Primary button
-          </a>
+          <button type="button" class="btn btn-primary" (click)="openModal(template2)">Change solution</button>
         </div>
       </div>
       <div class="col d-flex align-items-start">
@@ -30,10 +26,68 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
           <h2>Scheduled</h2>
           <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.{{PM.scheduled}}</p>
-          <a href="#" class="btn btn-primary">
-            Primary button
-          </a>
+          <button type="button" class="btn btn-primary" (click)="openModal(template3)">Change scheduled date</button>
         </div>
       </div>
     </div>
   </div>
+
+  <ng-template #template1>
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h2 class="fw-bold mb-0">Change description here</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()"></button>
+      </div>
+  
+      <div class="modal-body p-5 pt-0">
+        <form [formGroup]="inputForm" (ngSubmit)="editTextPm()">
+          <div class="form-floating mb-3">
+            <textarea class="form-control" formControlName="input" rows="3"></textarea>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">save change</button>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #template2>
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h2 class="fw-bold mb-0">Change description here</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()"></button>
+      </div>
+  
+      <div class="modal-body p-5 pt-0">
+        <form [formGroup]="inputForm" (ngSubmit)="editSolutionPm()">
+          <div class="form-floating mb-3">
+            <textarea class="form-control" formControlName="input" rows="3"></textarea>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">save change</button>
+        </form>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #template3>
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h2 class="fw-bold mb-0">change Scheduled date here</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()"></button>
+      </div>
+  
+      <div class="modal-body p-5 pt-0">
+        <form [formGroup]="inputForm" (ngSubmit)="editScheduledPm()">
+          <div class="form-floating mb-3">
+            <input 
+            formControlName="input"
+            type="date"
+            class="datepicker_input form-control border-2"
+            id="datepicker1"
+            required
+            placeholder="YYYY-MM-DD">
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">save change</button>
+        </form>
+      </div>
+    </div> 
+  </ng-template>

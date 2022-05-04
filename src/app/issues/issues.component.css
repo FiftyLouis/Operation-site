@@ -8,7 +8,6 @@
 *, ::after, ::before {
     box-sizing: border-box;
 }
-user agent stylesheet
 div {
     display: block;
 }

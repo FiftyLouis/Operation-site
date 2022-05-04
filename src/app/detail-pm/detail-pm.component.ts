@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 interface PM{
   id:number
@@ -19,7 +21,14 @@ export class DetailPmComponent implements OnInit {
   id : number;
   PM : PM;
 
-  constructor(private dataService: DataService, private router: ActivatedRoute) { }
+  modalRef : BsModalRef;
+
+  inputForm = new FormGroup({
+    input: new FormControl(),
+
+  })
+
+  constructor(private dataService: DataService, private router: ActivatedRoute, private modalService: BsModalService) { }
 
 
   ngOnInit(): void {
@@ -36,6 +45,34 @@ export class DetailPmComponent implements OnInit {
       this.PM = data.value;
       this.PM.scheduled = this.reformatDate(this.PM.scheduled.split('T')[0]);
     })
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+ }
+
+  editTextPm(){
+    const val = this.inputForm.value;
+    this.dataService.editTextPm(this.id, val.input).subscribe( data => {
+      console.log(data);
+    });
+    window.location.reload();
+  }
+
+  editSolutionPm(){
+    const val = this.inputForm.value;
+    this.dataService.editSolutionPm(this.id, val.input).subscribe( data => {
+      console.log(data);
+    });
+    window.location.reload();
+  }
+
+  editScheduledPm(){
+    const val = this.inputForm.value;
+    this.dataService.editScheduledPm(this.id, val.input).subscribe( data => {
+      console.log(data);
+    });
+    window.location.reload();
   }
 
   reformatDate(s : string){
