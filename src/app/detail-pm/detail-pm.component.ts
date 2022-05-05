@@ -20,6 +20,8 @@ export class DetailPmComponent implements OnInit {
 
   id : number;
   PM : PM;
+  login : any;
+
 
   modalRef : BsModalRef;
 
@@ -39,12 +41,17 @@ export class DetailPmComponent implements OnInit {
     }else {
       console.log("not a number");
     }
-    })
+    });
     this.dataService.GetPm(this.id).subscribe(data => {
       console.log(data);
       this.PM = data.value;
       this.PM.scheduled = this.reformatDate(this.PM.scheduled.split('T')[0]);
-    })
+    });
+    if(localStorage.key(0)){
+      this.login = true;
+    }else{
+      this.login = false
+    }
   }
 
   openModal(template: TemplateRef<any>) {
