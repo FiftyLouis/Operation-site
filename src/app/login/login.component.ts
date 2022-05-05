@@ -1,10 +1,8 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
-import moment from 'moment';
+import { catchError, throwError } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 

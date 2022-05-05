@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import moment from 'moment';
 import { AuthServiceService } from '../auth-service.service';
 
 @Component({

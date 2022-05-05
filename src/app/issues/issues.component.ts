@@ -2,11 +2,8 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../data.service';
 import { AuthServiceService } from '../auth-service.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 
 interface issues{
   id: number;

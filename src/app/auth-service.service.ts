@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import moment from 'moment';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 
@@ -15,7 +14,7 @@ export class AuthServiceService {
   }
 
   ngOnInit(): void {
-
+    console.log("initialize");
   }
 
   login(userName:string, password:string ) : Observable<any>{

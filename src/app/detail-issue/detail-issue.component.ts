@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -53,7 +52,7 @@ export class DetailIssueComponent implements OnInit {
     if(localStorage.key(0)){
       this.login = true;
     }else{
-      this.login = false
+      this.login = false;
     }
   }
 

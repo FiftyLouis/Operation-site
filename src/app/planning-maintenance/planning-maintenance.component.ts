@@ -2,7 +2,6 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DataService } from '../data.service';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
-import { elementAt } from 'rxjs';
 
 interface PM{
 id:number
@@ -64,7 +63,7 @@ export class PlanningMaintenanceComponent implements OnInit {
   var date = new Date();
   date.setDate(date.getDate()-int);
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
-    data.forEach((element, index)=> {
+    data.forEach((element)=> {
       element.dateofCreation = element.dateofCreation.split("T")[0];
       element.scheduled = element.scheduled.split("T")[0];
     });
@@ -79,7 +78,7 @@ export class PlanningMaintenanceComponent implements OnInit {
 
  All(){
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
-    data.forEach((element, index)=> {
+    data.forEach((element)=> {
       element.dateofCreation = element.dateofCreation.split("T")[0];
       element.scheduled = element.scheduled.split("T")[0];
     });
