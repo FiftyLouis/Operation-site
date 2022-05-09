@@ -51,13 +51,13 @@ namespace LogosAPI.Controllers
 
 
         //delete
-        [HttpDelete]
+        [HttpDelete("/DeleteIssues")]
         public JsonResult DeleteIssues(int id)
         {
             var issue = _context.Issues.Find(id);
 
             if (issue == null)
-                return new JsonResult(NotFound());
+                return new JsonResult(NotFound(id));
 
             _context.Issues.Remove(issue);
 
@@ -404,5 +404,7 @@ namespace LogosAPI.Controllers
 
             return new JsonResult(Ok(pm));
         }
+
+        
     }
 }
