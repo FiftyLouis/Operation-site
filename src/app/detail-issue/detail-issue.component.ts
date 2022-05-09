@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { DataService } from '../data.service';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -88,6 +88,13 @@ export class DetailIssueComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+ }
+
+ deleteIssue(){
+  this.dataService.DeleteIssues(this.id).subscribe( data => {
+    console.log(data);
+  });
+  window.location.href="http://localhost:4200/currentIssues";
  }
 
 }

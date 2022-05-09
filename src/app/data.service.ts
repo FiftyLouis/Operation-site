@@ -31,22 +31,22 @@ export class DataService {
 
   SolvedIssue(id:number, date: Date): Observable<any>{
     console.log(id,date);
-    const url = `http://localhost:49153/SolvedIssue?id=${id}&date=${date}`;
+    const url = this.API +`/SolvedIssue?id=${id}&date=${date}`;
     return this.httpClient.post(url, {});
   }
 
   CreateIssue(a:string, t:string, eta:string) : Observable<any>{
-    const url = `http://localhost:49153/CreateIssue?AffectedSolutions=${a}&Text=${t}&ETA=${eta}`;
+    const url = this.API +`/CreateIssue?AffectedSolutions=${a}&Text=${t}&ETA=${eta}`;
     return this.httpClient.post(url, {});
   }
 
   DeletePmAdmin(id:number): Observable<any>{
-    const url = `http://localhost:49153/DeletePmAdmin?id=${id}`;
+    const url = this.API + `/DeletePmAdmin?id=${id}`;
     return this.httpClient.delete(url)
   }
 
   CreatePm(a:string, t:string, s:string): Observable<any>{
-    const url = `http://localhost:49153/CreatePm?AffectedSolutions=${a}&Text=${t}&s=${s}`;
+    const url = this.API +`/CreatePm?AffectedSolutions=${a}&Text=${t}&s=${s}`;
     return this.httpClient.post(url, {});
   }
 
@@ -55,27 +55,27 @@ export class DataService {
   }
 
   GetIssues(id :number): Observable<any> {
-    const url = `http://localhost:49153/GetIssues?id=${id}`;
+    const url = this.API + `/GetIssues?id=${id}`;
     return this.httpClient.get(url);
   }
 
   GetPm(id: number): Observable<any> {
-    const url = `http://localhost:49153/GetPm?id=${id}`;
+    const url = this.API + `/GetPm?id=${id}`;
     return this.httpClient.get(url,)
   }
 
   editTextIssue(id : number, text :string): Observable<any> {
-    const url = `http://localhost:49153/editTextIssue?id=${id}&t=${text}`;
+    const url = this.API + `/editTextIssue?id=${id}&t=${text}`;
     return this.httpClient.post(url, {});
   }
 
   editSolutionIssue(id : number, text :string): Observable<any> {
-    const url = `http://localhost:49153/editSolutionIssue?id=${id}&s=${text}`;
+    const url = this.API + `/editSolutionIssue?id=${id}&s=${text}`;
     return this.httpClient.post(url, {});
   }
 
   editEtaIssue(id : number, eta :string): Observable<any> {
-    const url = `http://localhost:49153/editEtaIssue?id=${id}&date=${eta}`;
+    const url = this.API +`/editEtaIssue?id=${id}&date=${eta}`;
     return this.httpClient.post(url, {});
   }
 
@@ -92,5 +92,10 @@ export class DataService {
   editScheduledPm(id : number, date :string): Observable<any>{
     const url = this.API +`/editScheduledPm?id=${id}&date=${date}`;
     return this.httpClient.post(url, {});
+  }
+
+  DeleteIssues(id:number): Observable<any>{
+    const url = this.API +`/deleteIssues?id=${id}`;
+    return this.httpClient.delete(url);
   }
 }

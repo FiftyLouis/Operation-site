@@ -86,4 +86,11 @@ export class DetailPmComponent implements OnInit {
     const result = s.split('-').reverse();
     return result.join('/');
   }
+
+  deletePM(){
+    this.dataService.DeletePmAdmin(this.id).subscribe( data => {
+      console.log(data);
+    });
+    window.location.href="http://localhost:4200/planningMaintenance";
+  }
 }

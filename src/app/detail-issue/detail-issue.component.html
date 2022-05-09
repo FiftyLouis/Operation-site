@@ -1,12 +1,16 @@
 
 <div class="container px-4 py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Issue n°{{id}}</h2>
+    <ng-container *ngIf="login">
+      <button type="button" class="btn btn-danger" style="text-align: right;" (click)="openModal(template4)">delete</button>
+    </ng-container>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      
       <div class="col d-flex align-items-start">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
           <h2>Description</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words. {{issues.text}}</p>
+          <p>{{issues.text}}</p>
           <ng-container *ngIf="login">
             <button type="button" class="btn btn-primary" (click)="openModal(template1)">Change description</button>
           </ng-container>
@@ -18,7 +22,7 @@
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
           <h2>Affected Solutions</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.{{issues.affectedSolutions}}</p>
+          <p>{{issues.affectedSolutions}}</p>
           <ng-container *ngIf="login">
             <button type="button" class="btn btn-primary" (click)="openModal(template2)">Change affected solution</button>
           </ng-container>
@@ -30,7 +34,7 @@
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
           <h2>Estimated Time Arrival</h2>
-          <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.{{issues.eta}}</p>
+          <p id="eta">{{issues.eta}}</p>
           <ng-container *ngIf="login">
             <button type="button" class="btn btn-primary" (click)="openModal(template3)">Change estimated time arrival</button>
           </ng-container>
@@ -97,4 +101,17 @@
       </form>
     </div>
   </div> 
+</ng-template>
+
+<ng-template #template4>
+  <div class="modal-content rounded-4 shadow">
+  <div class="modal-body p-4 text-center">
+    <h5 class="mb-0">Remove</h5>
+    <p class="mb-0">Are you sure you want to remove this issue ?</p>
+  </div>
+  <div class="modal-footer flex-nowrap p-0">
+    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right" (click)="deleteIssue()"><strong>Yes, removed</strong></button>
+    <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" (click)="modalRef.hide()">Close</button>
+  </div>
+</div>
 </ng-template>
