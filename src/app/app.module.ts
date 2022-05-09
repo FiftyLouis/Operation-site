@@ -25,6 +25,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { NgChartsModule } from 'ng2-charts';
 import { DetailIssueComponent } from './detail-issue/detail-issue.component';
 import { DetailPmComponent } from './detail-pm/detail-pm.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -56,6 +59,9 @@ import { DetailPmComponent } from './detail-pm/detail-pm.component';
     MatFormFieldModule,
     MatNativeDateModule,
     NgChartsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }

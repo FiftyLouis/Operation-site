@@ -1,9 +1,12 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { DataService } from '../data.service';
 import { AuthServiceService } from '../auth-service.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+
 
 interface issues{
   id: number;
@@ -18,7 +21,7 @@ interface issues{
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
-  styleUrls: ['./issues.component.css']
+  styleUrls: ['./issues.component.css'],
 })
 export class IssuesComponent implements OnInit {
 
@@ -26,6 +29,9 @@ export class IssuesComponent implements OnInit {
   login : any;
   modalRef!: BsModalRef;
   idSolved!: number;
+  searchText = '';
+  toggleSearch:boolean = false;
+  @ViewChild('searchBar') searchbar: ElementRef;
 
   DateForm = new FormGroup({
     date: new FormControl(),
@@ -58,7 +64,7 @@ export class IssuesComponent implements OnInit {
     this.dataService.SolvedIssue(this.idSolved, val.date).subscribe( (data : issues) => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/currentIssues"
+    window.location.href="http://localhost:4200/currentIssues";
   }
 
   openModal(template: TemplateRef<any>, id : number) {
@@ -134,6 +140,16 @@ export class IssuesComponent implements OnInit {
 reformatDate(s : string){
   const result = s.split('-').reverse();
   return result.join('/');
+}
+
+openSearch(){
+  this.toggleSearch = true;
+  this.searchbar.nativeElement.focus();
+}
+
+searchClose(){
+  this.searchText = '';
+  this.toggleSearch = false;
 }
 
 }
