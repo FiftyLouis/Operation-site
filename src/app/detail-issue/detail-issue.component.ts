@@ -48,6 +48,7 @@ export class DetailIssueComponent implements OnInit {
       console.log(data);
       this.issues = data.value;
       this.issues.eta = this.reformatDate(this.issues.eta.split('T')[0]);
+      this.issues.date = this.reformatDate(this.issues.date.split('T')[0]);
     })
     if(localStorage.key(0)){
       this.login = true;

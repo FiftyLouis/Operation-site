@@ -4,8 +4,6 @@ import { AuthServiceService } from '../auth-service.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
 
 
 interface issues{
@@ -17,6 +15,7 @@ interface issues{
   solving: string;
   closing: string;
 }
+
 
 @Component({
   selector: 'app-issues',
