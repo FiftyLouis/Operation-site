@@ -46,6 +46,7 @@ export class DetailPmComponent implements OnInit {
       console.log(data);
       this.PM = data.value;
       this.PM.scheduled = this.reformatDate(this.PM.scheduled.split('T')[0]);
+      this.PM.dateofCreation = this.reformatDate(this.PM.dateofCreation.split('T')[0]);
     });
     if(localStorage.key(0)){
       this.login = true;
