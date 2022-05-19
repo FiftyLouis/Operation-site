@@ -144,7 +144,7 @@ namespace LogosAPI.Controllers
 
             foreach (var pm in _context.PlannedMaintenance)
             {
-               int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddDays(-1));
+               int Results = DateTime.Compare(DateTime.Parse(pm.scheduled), DateTime.Now.AddHours(2));
 
                 if(Results >= 0)
                     pms.Add(pm);
@@ -220,8 +220,8 @@ namespace LogosAPI.Controllers
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).Closing = DateTime.Now;
-            _context.Issues.Find(id).Solving = date;
+            _context.Issues.Find(id).Closing = DateTime.UtcNow.AddHours(2).ToString("MM/dd/yyyy H:mm");
+            _context.Issues.Find(id).Solving = date.ToString("MM/dd/yyyy H:mm");
 
 
             _context.SaveChanges();
@@ -275,7 +275,7 @@ namespace LogosAPI.Controllers
 
             foreach (var pm in _context.PlannedMaintenance)
             {
-                int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddDays(-1));
+                int Results = DateTime.Compare(DateTime.Parse(pm.scheduled), DateTime.Now.AddHours(2));
 
                 if (Results < 0)
                     pms.Add(pm);
@@ -340,7 +340,7 @@ namespace LogosAPI.Controllers
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).ETA = date;
+            _context.Issues.Find(id).ETA = date.ToString("MM/dd/yyyy H:mm");
             issue = _context.Issues.Find(id);
 
             _context.SaveChanges();
@@ -397,7 +397,7 @@ namespace LogosAPI.Controllers
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Find(id).scheduled = date;
+            _context.PlannedMaintenance.Find(id).scheduled = date.ToString("MM/dd/yyyy H:mm");
             pm = _context.PlannedMaintenance.Find(id);
 
             _context.SaveChanges();

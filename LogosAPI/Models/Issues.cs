@@ -6,17 +6,17 @@ namespace LogosAPI.Models
     {
         public int id { get; set; }
 
-        public DateTime Date { get; set; }
+        public String Date { get; set; }
 
         public string AffectedSolutions { get; set; }
 
         public string Text { get; set; }
 
-        public DateTime ETA { get; set; }
+        public string ETA { get; set; }
 
-        public DateTime? Solving { get; set; }
+        public string? Solving { get; set; }
 
-        public DateTime? Closing { get; set; }
+        public string? Closing { get; set; }
 
 
         [JsonConstructor]
@@ -25,10 +25,10 @@ namespace LogosAPI.Models
        public Issues(string a, string t, DateTime eta)
         {
             this.id = 0;
-            this.Date = DateTime.Now;
+            this.Date = DateTime.UtcNow.AddHours(2).ToString("MM/dd/yyyy H:mm");
             this.AffectedSolutions = a;
             this.Text = t;
-            this.ETA = eta;
+            this.ETA = eta.ToString("MM/dd/yyyy H:mm");
             this.Solving = null;
             this.Closing = null;
         }
