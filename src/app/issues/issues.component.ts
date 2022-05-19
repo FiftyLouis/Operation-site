@@ -76,18 +76,10 @@ export class IssuesComponent implements OnInit {
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     var date = new Date()
     date.setDate(date.getDate()-int);
-    data.forEach( element => {
-      element.date = element.date.split("T")[0];
-      element.eta = element.eta.split("T")[0];
-    })
     //filter and set data chart
     this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
     this.setDataChar();
-    //formated date
-    this.currentIssues.forEach( element =>{
-      element.date = this.reformatDate(element.date);
-      element.eta = this.reformatDate(element.eta);
-    })
+
   });
  }
 
@@ -95,18 +87,8 @@ export class IssuesComponent implements OnInit {
    //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     console.log(data);
-    data.forEach( element => {
-      element.date = element.date.split("T")[0];
-      element.eta = element.eta.split("T")[0];
-    });
-    //set data and data chart
     this.currentIssues = data;
     this.setDataChar();
-    //formated date
-    this.currentIssues.forEach( element =>{
-      element.date = this.reformatDate(element.date);
-      element.eta = this.reformatDate(element.eta);
-    });
   });
  }
 
@@ -136,10 +118,6 @@ export class IssuesComponent implements OnInit {
   this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
 }
 
-reformatDate(s : string){
-  const result = s.split('-').reverse();
-  return result.join('/');
-}
 
 openSearch(){
   this.toggleSearch = true;

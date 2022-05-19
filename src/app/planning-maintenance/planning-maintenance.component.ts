@@ -63,31 +63,15 @@ export class PlanningMaintenanceComponent implements OnInit {
   var date = new Date();
   date.setDate(date.getDate()-int);
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
-    data.forEach((element)=> {
-      element.dateofCreation = element.dateofCreation.split("T")[0];
-      element.scheduled = element.scheduled.split("T")[0];
-    });
     this.PlannedMaintenance = data.filter(element => Date.parse(element.dateofCreation).valueOf() >= date.valueOf());
     this.setChartPm();
-    this.PlannedMaintenance.forEach(element => {
-      element.dateofCreation = this.reformatDate(element.dateofCreation);
-      element.scheduled = this.reformatDate(element.scheduled);
-    });
   });
  }
 
  All(){
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
-    data.forEach((element)=> {
-      element.dateofCreation = element.dateofCreation.split("T")[0];
-      element.scheduled = element.scheduled.split("T")[0];
-    });
     this.PlannedMaintenance = data;
     this.setChartPm();
-    this.PlannedMaintenance.forEach(element => {
-      element.dateofCreation = this.reformatDate(element.dateofCreation);
-      element.scheduled = this.reformatDate(element.scheduled);
-    });
   })
  }
 
@@ -115,11 +99,6 @@ export class PlanningMaintenanceComponent implements OnInit {
    }
   });
   this.barChartData = [{ data : data, label: 'Scheduled Time'}];
-}
-
-reformatDate(s : string){
-  const result = s.split('-').reverse();
-  return result.join('/');
 }
 
 }

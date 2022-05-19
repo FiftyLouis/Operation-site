@@ -29,7 +29,8 @@
   <!-- /.row -->
 
   <!-- Related Action Row -->
-  <h3 class="my-4">Action</h3>
+  <ng-container *ngIf="login">
+      <h3 class="my-4">Action</h3>
 
   <div class="row" id="action">
 
@@ -50,6 +51,7 @@
     </div>
 
   </div>
+  </ng-container>
   <!-- /.row -->
 
 </div>
@@ -102,13 +104,7 @@
       <div class="modal-body p-5 pt-0">
         <form [formGroup]="inputForm" (ngSubmit)="editScheduledPm()">
           <div class="form-floating mb-3">
-            <input 
-            formControlName="input"
-            type="date"
-            class="datepicker_input form-control border-2"
-            id="datepicker1"
-            required
-            placeholder="YYYY-MM-DD">
+            <input class="form-control" type="datetime-local" id="dateTime" name="date" formControlName="input">
           </div>
           <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">save change</button>
         </form>

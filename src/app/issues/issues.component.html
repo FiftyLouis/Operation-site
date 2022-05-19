@@ -13,25 +13,25 @@
             <li class="nav-item">
               <button type="button" class="btn btn-light" (click)="TodayIssue(1)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                ETA : Today
+                Added : Today
                 </button>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-light" (click)="TodayIssue(7)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                ETA : This week
+                Added : Last week
               </button>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-light" (click)="TodayIssue(30)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                ETA : This month
+                Added : Last month
               </button>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-light" (click)="All()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                ETA : All Time
+                Added : All Time
               </button>
             </li>
           </ul>
@@ -65,6 +65,7 @@
               <caption>List of current issuees</caption>
               <thead>
                 <tr class="bg-primary" style="color:white;">
+                  <th scope="col">#</th>
                   <th scope="col">Text</th>
                   <th scope="col">Date of creation</th>
                   <th scope="col">Affected Solutions</th>
@@ -74,7 +75,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of currentIssues" class="align-bottom">
-                  <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.text}}</a></td>
+                  <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.id}}</a></td>
+                  <td>{{data.text}}</td>
                   <td>{{data.date}}</td>
                   <td>{{data.affectedSolutions}}</td>
                   <td>{{data.eta}}</td>
@@ -90,6 +92,7 @@
               <caption>List of current issues</caption>
               <thead>
                 <tr class="bg-primary" style="color:white;">
+                  <th scope="col">#</th>
                   <th scope="col">Text</th>
                   <th scope="col">Date of creation</th>
                   <th scope="col">Affected Solutions</th>
@@ -98,7 +101,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let data of currentIssues" class="align-bottom">
-                  <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.text}}</a></td>
+                  <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.id}}</a></td>
+                  <td>{{data.text}}</td>
                   <td>{{data.date}}</td>
                   <td>{{data.affectedSolutions}}</td>
                   <td>{{data.eta}}</td>
@@ -120,13 +124,7 @@
   </div>
   <div class="modal-body">
     <form [formGroup]="DateForm" (ngSubmit)="solving()">
-      <input 
-          formControlName="date"
-          type="date"
-          class="datepicker_input form-control border-2"
-          id="datepicker1"
-          required
-          placeholder="YYYY-MM-DD">
+      <input class="form-control" type="datetime-local" id="dateTime" name="date" formControlName="date">
       <br> <br>
       <button class="btn btn-primary">solving</button>
   </form>
