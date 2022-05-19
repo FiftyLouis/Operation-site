@@ -15,6 +15,7 @@ namespace LogosAPI.Models
         public string text { get; set; }
 
 
+
         [JsonConstructor]
         public PlannedMaintenance() { }
         
