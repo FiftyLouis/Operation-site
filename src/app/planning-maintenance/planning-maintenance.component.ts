@@ -22,6 +22,7 @@ export class PlanningMaintenanceComponent implements OnInit {
   modalRef!: BsModalRef;
   login : any;
   idRmv!: number;
+  duration: number;
 
   barChartData: ChartDataset[] | undefined;
   public barChartOptions: ChartOptions = {
@@ -101,4 +102,12 @@ export class PlanningMaintenanceComponent implements OnInit {
   this.barChartData = [{ data : data, label: 'Scheduled Time'}];
 }
 
+durationTime(scheduled: string):string{
+    var d1 = new Date(scheduled);
+    var d2 = new Date(Date.now());
+    var result = d1.valueOf() - d2.valueOf();
+    var h = result/(1000*60*60);
+    var min = h - Math.floor(result/(1000*60*60));
+    return Math.floor(h) + " h " + Math.floor(min*60) + " min"; 
+}
 }

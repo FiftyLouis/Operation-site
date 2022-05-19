@@ -68,6 +68,7 @@
                 <th scope="col">Date of creation</th>
                 <th scope="col">Affected Solutions</th>
                 <th scope="col">scheduled</th>
+                <th scope="col">duration</th>
                 <th scope="col">remove</th>
               </tr>
             </thead>
@@ -78,6 +79,7 @@
                 <td>{{data.dateofCreation}}</td>
                 <td>{{data.affectedSolutions}}</td>
                 <td>{{data.scheduled}}</td>
+                <td>{{durationTime(data.scheduled)}}</td>
                 <td><button type="button" class="btn btn-danger" (click)="openModal(template, data.id)">remove</button></td>
               </tr>
             </tbody>
