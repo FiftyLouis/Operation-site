@@ -68,6 +68,23 @@
             <a href="planningMaintenance" class="btn btn-lg btn-block btn-outline-primary" type="button">See planned maintenance</a>
           </div>
         </div>
+        <ng-container *ngIf="login">
+          <div class="card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Historical Maintenance</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">{{nbHistoricalPM}} <small class="text-muted">maintenances</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>all details about the current</li>
+              <li>and future maintenance</li>
+              <li>sorted by their date of creation</li>
+              <li>and also their scheduled date</li>
+            </ul>
+            <a href="historicalMaintenance" class="btn btn-lg btn-block btn-outline-primary" type="button">See historical maintenance</a>
+          </div>
+        </div>
+        </ng-container>
       </div>
     </div>
   </section>

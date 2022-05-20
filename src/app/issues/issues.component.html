@@ -66,11 +66,11 @@
               <thead>
                 <tr class="bg-primary" style="color:white;">
                   <th scope="col">#</th>
-                  <th scope="col">Text</th>
+                  <th scope="col">Description</th>
                   <th scope="col">Date of creation</th>
                   <th scope="col">Affected Solutions</th>
-                  <th scope="col">ETA</th>
-                  <th scope="col">Solving</th>
+                  <th scope="col">ETA for normal operation</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -81,7 +81,7 @@
                   <td>{{data.affectedSolutions}}</td>
                   <td>{{data.eta}}</td>
                   <td>
-                    <button type="button" class="btn btn-primary" (click)="openModal(template, data.id)">solving</button>
+                    <button type="button" class="btn btn-primary" (click)="openModal(template, data.id)">Resolve</button>
                   </td>
                 </tr>
               </tbody>
@@ -93,10 +93,10 @@
               <thead>
                 <tr class="bg-primary" style="color:white;">
                   <th scope="col">#</th>
-                  <th scope="col">Text</th>
+                  <th scope="col">Descriptionh>
                   <th scope="col">Date of creation</th>
                   <th scope="col">Affected Solutions</th>
-                  <th scope="col">ETA</th>
+                  <th scope="col">ETA for normal operation</th>
                 </tr>
               </thead>
               <tbody>

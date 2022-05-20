@@ -10,6 +10,9 @@ export class LandingPageComponent implements OnInit {
   nbIssue! : number;
   nbHi! : number;
   nbPm! : number;
+  login : any;
+  nbHistoricalPM : number;
+
 
 
   constructor(private dataService : DataService) {}
@@ -18,6 +21,12 @@ export class LandingPageComponent implements OnInit {
     this.nbIssues();
     this.nbHistorical();
     this.nbPlanned();
+    if(localStorage.key(0)){
+      this.login = true;
+      this.nbHistoricalPm();
+    }else{
+      this.login = false
+    }
   }
 
 
@@ -37,6 +46,13 @@ export class LandingPageComponent implements OnInit {
     this.dataService.GetPmScheduledDate()
       .subscribe(data => {
         this.nbPm = data.length;
+      })
+  }
+
+  nbHistoricalPm(){
+    this.dataService.GetHistoricalPmAdmin()
+      .subscribe(data => {
+        this.nbHistoricalPM = data.length;
       })
   }
 

@@ -6,17 +6,19 @@
       <caption>List of Historical Issues</caption>
       <thead>
         <tr class="bg-primary" style="color:white;">
-          <th scope="col">Text</th>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
           <th scope="col">Date of creation</th>
           <th scope="col">Affected Solutions</th>
-          <th scope="col">ETA</th>
+          <th scope="col">ETA for normal operation</th>
           <th scope="col">closing</th>
           <th scope="col">solving</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of HistoricalIssues">
-          <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.text}}</a></td>
+          <td><a [routerLink]="['/currentIssues/detailIssue',data.id]">{{data.id}}</a></td>
+          <td>{{data.text}}</td>
           <td>{{data.date}}</td>
           <td>{{data.affectedSolutions}}</td>
           <td>{{data.eta}}</td>

@@ -5,16 +5,17 @@
       <caption>List of Historical Planned Maintenance</caption>
       <thead>
         <tr class="bg-primary" style="color:white;">
-          <th scope="col">Text</th>
+          <th scope="col">#</th>
+          <th scope="col">Description</th>
           <th scope="col">Date of creation</th>
           <th scope="col">Affected Solutions</th>
           <th scope="col">scheduled</th>
-          <th scope="col">duration</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let data of PlannedMaintenance">
-          <td><a [routerLink]="['/planningMaintenance/detailPm', data.id]">{{data.text}}</a></td>
+          <td><a [routerLink]="['/planningMaintenance/detailPm', data.id]">{{data.id}}</a></td>
+          <td>{{data.text}}</td>
           <td>{{data.dateofCreation}}</td>
           <td>{{data.affectedSolutions}}</td>
           <td>{{data.scheduled}}</td>
