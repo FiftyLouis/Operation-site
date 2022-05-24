@@ -1,7 +1,7 @@
 
 <body class="text-center">
     <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="loginUser()">
-      <img class="mb-4" src="../../assets/img/logo.png" alt="logo logos" width="200" height="80">
+      <img class="mb-4" src="../../assets/img/logo.png" alt="logo logos" width="400" height="80">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in to connect to admin Dashboard</h1>
       <br>
       <input type="text" id="inputEmail" class="form-control" placeholder="User Name" required="" autofocus="" formControlName="userName">
@@ -15,7 +15,7 @@
 
 <ng-template #template>
   <div class="modal-header">
-      <h4 class="modal-title pull-left">JWT_Auth Login Failed</h4>
+      <h4 class="modal-title pull-left">Error {{error}}</h4>
       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
           <span aria-hidden="true">&times;</span>
       </button>

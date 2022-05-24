@@ -15,7 +15,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 })
 export class LoginComponent implements OnInit {
 
-  result! : string;
+  error : string;
 
   loginForm = new FormGroup({
     userName: new FormControl('', [Validators.required]),
@@ -36,6 +36,8 @@ export class LoginComponent implements OnInit {
     this.auth.login(val.userName, val.password)
     .pipe(catchError((err) => {
       console.error(err);
+      this.error = err.error;
+      console.log(this.error);
       this.modalRef = this.modalService.show(this.modal);
       return throwError(err);
     })).subscribe(data => {

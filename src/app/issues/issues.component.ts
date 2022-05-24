@@ -3,7 +3,6 @@ import { DataService } from '../data.service';
 import { AuthServiceService } from '../auth-service.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 
 interface issues{
@@ -37,16 +36,6 @@ export class IssuesComponent implements OnInit {
   })
 
 
-  barChartData: ChartDataset[] | undefined;
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    backgroundColor: 'blue',
-  };
-  public barChartLabels  = ['1 day', '7 days', '30 days', 'more'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins: any = [];
-
   constructor(private dataService : DataService, private auth : AuthServiceService, private modalService : BsModalService ) { }
 
   ngOnInit(): void {
@@ -71,15 +60,14 @@ export class IssuesComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
  }
 
- TodayIssue(int:number){
+ Added(int:number){
    //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
-    var date = new Date()
-    date.setDate(date.getDate()-int);
+    var date = new Date().setHours(new Date().getHours()-int);
+    //date.setDate(date.getHours()-int);
     //filter and set data chart
+    console.log(date);
     this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
-    this.setDataChar();
-
   });
  }
 
@@ -88,35 +76,9 @@ export class IssuesComponent implements OnInit {
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     console.log(data);
     this.currentIssues = data;
-    this.setDataChar();
   });
  }
 
- setDataChar() {
-  let data: number[] = [0, 0, 0, 0];
-  this.currentIssues.forEach(element => {
-    var d = Date.parse(element.eta);
-    var day = new Date();
-    day.setDate(day.getDate()+1);
-    var week = new Date();
-    week.setDate(week.getDate()+7);
-    var month = new Date();
-    month.setDate(month.getDate()+30);
-    if(d.valueOf() <= day.valueOf()){
-      data[0]++;
-    }
-    else if(d.valueOf() <= week.valueOf()){
-      data[1]++;
-    }
-    else if(d.valueOf() <= month.valueOf()){
-      data[2]++;
-    }
-    else{
-      data[3]++;
-    }
-  });
-  this.barChartData = [{ data : data, label: 'Estimated Time of Arrival'}];
-}
 
 
 openSearch(){

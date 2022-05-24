@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private API = "http://localhost:49153";
+  private API = "http://localhost:49154";
 
   constructor(private http: HttpClient, private router: Router, private dialog : MatDialog) { 
   }
