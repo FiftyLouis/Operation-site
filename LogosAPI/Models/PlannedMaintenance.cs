@@ -2,30 +2,33 @@
 
 namespace LogosAPI.Models
 {
-    public class PlannedMaintenance
+    public class plannedmaintenance
     {
-        public int id{ get; set; }
+        public int id { get; set; }
 
-        public string dateofCreation { get; set; }
+        public DateTime dateofCreation { get; set; }
 
-        public string scheduled { get; set; }
+        public DateTime scheduled { get; set; }
 
-        public string affectedSolutions { get; set; }  
+        public string duration { get; set; }
+
+        public string affectedSolutions { get; set; }
 
         public string text { get; set; }
 
 
 
         [JsonConstructor]
-        public PlannedMaintenance() { }
-        
-        public PlannedMaintenance(string a, string t, DateTime scheduled)
+        public plannedmaintenance() { }
+
+        public plannedmaintenance(string a, string t, DateTime scheduled, DateTime d)
         {
             this.id = 0;
-            this.dateofCreation = DateTime.UtcNow.AddHours(2).ToString("MM/dd/yyyy H:mm");
+            this.dateofCreation = DateTime.UtcNow.AddHours(2);
             this.affectedSolutions = a;
             this.text = t;
-            this.scheduled = scheduled.ToString("MM/dd/yyyy H:mm");
+            this.scheduled = scheduled;
+            this.duration = d.ToString("t");
         }
     }
 }

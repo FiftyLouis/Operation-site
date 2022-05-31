@@ -1,14 +1,13 @@
-using Microsoft.EntityFrameworkCore;
+using System.Text;
 using LogosAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddDbContext<ApiContext>(opt => opt.UseInMemoryDatabase("LogosOperationDb"));
+builder.Services.AddDbContext<ApiContext>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

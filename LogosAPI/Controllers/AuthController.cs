@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using LogosAPI.Data;
 using LogosAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
@@ -28,9 +27,10 @@ namespace LogosAPI.Controllers
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             User user = new User();
-            foreach(var u in _context.Users)
+            foreach (var u in _context.users)
             {
-                if (u.UserName.Equals(request.UserName)) {
+                if (u.UserName.Equals(request.UserName))
+                {
                     return BadRequest("error userName already used");
                 }
             }
@@ -49,7 +49,7 @@ namespace LogosAPI.Controllers
         public async Task<ActionResult<User>> Login(UserDto request)
         {
 
-            foreach(var user in _context.Users)
+            foreach (var user in _context.users)
             {
                 if (user.UserName.Equals(request.UserName))
                 {
@@ -61,13 +61,13 @@ namespace LogosAPI.Controllers
                     return BadRequest("bad password");
                 }
             }
-            return  BadRequest("user not found");
+            return BadRequest("user not found");
         }
 
         [HttpDelete("/DeleteUser")]
         public JsonResult DeleteUser(string userName)
         {
-            foreach(var user in _context.Users)
+            foreach (var user in _context.users)
             {
                 if (user.UserName.Equals(userName))
                 {
@@ -100,7 +100,7 @@ namespace LogosAPI.Controllers
 
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-   
+
             return jwt;
         }
 
@@ -115,9 +115,9 @@ namespace LogosAPI.Controllers
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
-                 var computedhash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                var computedhash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedhash.SequenceEqual(passwordHash);
             }
         }

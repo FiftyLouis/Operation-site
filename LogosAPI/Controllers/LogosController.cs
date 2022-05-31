@@ -18,30 +18,30 @@ namespace LogosAPI.Controllers
         }
 
         [HttpPost, AllowAnonymous]
-        public JsonResult CreateEditIssues(Issues issues)
+        public JsonResult CreateEditissues(issues issue)
         {
-            if (issues.id == 0)
+            if (issue.id == 0)
             {
-                _context.Issues.Add(issues);
+                _context.issues.Add(issue);
             }
             else
             {
-                var issuesInDb = _context.Issues.Find(issues.id);
+                var issuesInDb = _context.issues.Find(issue.id);
                 if (issuesInDb == null)
                     return new JsonResult(NotFound());
-                issuesInDb = issues;
+                issuesInDb = issue;
             }
 
             _context.SaveChanges();
 
-            return new JsonResult(Ok(issues));
+            return new JsonResult(Ok(issue));
         }
 
         //get
-        [HttpGet("/GetIssues"), AllowAnonymous]
-        public JsonResult GetIssues(int id)
+        [HttpGet("/Getissues"), AllowAnonymous]
+        public JsonResult Getissues(int id)
         {
-            var issues = _context.Issues.Find(id);
+            var issues = _context.issues.Find(id);
 
             if (issues == null)
                 return new JsonResult(NotFound());
@@ -51,15 +51,15 @@ namespace LogosAPI.Controllers
 
 
         //delete
-        [HttpDelete("/DeleteIssues")]
-        public JsonResult DeleteIssues(int id)
+        [HttpDelete("/Deleteissues")]
+        public JsonResult Deleteissues(int id)
         {
-            var issue = _context.Issues.Find(id);
+            var issue = _context.issues.Find(id);
 
             if (issue == null)
                 return new JsonResult(NotFound(id));
 
-            _context.Issues.Remove(issue);
+            _context.issues.Remove(issue);
 
             _context.SaveChanges();
 
@@ -67,25 +67,25 @@ namespace LogosAPI.Controllers
         }
 
         //GetAll
-        [HttpGet("/GetAllIssues")]
-        public JsonResult GetAllIssues()
+        [HttpGet("/GetAllissues")]
+        public JsonResult GetAllissues()
         {
-            var issues = _context.Issues.ToList();
+            var issues = _context.issues.ToList();
 
             return new JsonResult(issues);
         }
 
         //planned Maintenance
         [HttpPost, AllowAnonymous]
-        public JsonResult CreateEditMaintenance(PlannedMaintenance pm)
+        public JsonResult CreateEditMaintenance(plannedmaintenance pm)
         {
             if (pm.id == 0)
             {
-                _context.PlannedMaintenance.Add(pm);
+                _context.plannedmaintenance.Add(pm);
             }
             else
             {
-                var pmInDb = _context.PlannedMaintenance.Find(pm.id);
+                var pmInDb = _context.plannedmaintenance.Find(pm.id);
                 if (pmInDb == null)
                     return new JsonResult(NotFound());
                 pmInDb = pm;
@@ -99,7 +99,7 @@ namespace LogosAPI.Controllers
         [HttpGet("/GetPm"), AllowAnonymous]
         public JsonResult GetPm(int id)
         {
-            var pm= _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
@@ -112,14 +112,14 @@ namespace LogosAPI.Controllers
         [HttpDelete]
         public JsonResult DeletePm(int id)
         {
-            var pm = _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Remove(pm);
+            _context.plannedmaintenance.Remove(pm);
 
             _context.SaveChanges();
 
@@ -129,24 +129,24 @@ namespace LogosAPI.Controllers
         [HttpGet("/GetAllPm")]
         public JsonResult GetAllPm()
         {
-            var pms = _context.PlannedMaintenance.ToList();
+            var pms = _context.plannedmaintenance.ToList();
 
             return new JsonResult(pms);
         }
 
-//specific function
+        //specific function
 
         //get plannedMaintennace ScheduledDate > currentDate
         [HttpGet("/GetPmScheduledDate"), AllowAnonymous]
         public JsonResult GetPmScheduledDate()
         {
-            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
+            List<plannedmaintenance> pms = new List<plannedmaintenance>();
 
-            foreach (var pm in _context.PlannedMaintenance)
+            foreach (var pm in _context.plannedmaintenance)
             {
-               int Results = DateTime.Compare(DateTime.Parse(pm.scheduled), DateTime.Now.AddHours(2));
+                int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddHours(2));
 
-                if(Results >= 0)
+                if (Results >= 0)
                     pms.Add(pm);
             }
 
@@ -161,14 +161,14 @@ namespace LogosAPI.Controllers
 
 
         //get issues for current issues page
-        [HttpGet("/GetCurrentIssues"), AllowAnonymous]
-        public JsonResult GetCurrentIssues()
+        [HttpGet("/GetCurrentissues"), AllowAnonymous]
+        public JsonResult GetCurrentissues()
         {
-            List<Issues> issues = new List<Issues>();
+            List<issues> issues = new List<issues>();
 
-            foreach (var issue in _context.Issues)
+            foreach (var issue in _context.issues)
             {
-                if(issue.Closing == null)
+                if (issue.Closing == null)
                     issues.Add(issue);
 
             }
@@ -185,12 +185,12 @@ namespace LogosAPI.Controllers
         }
 
         //get issues for historical issues
-        [HttpGet("/GetHistoricalIssues"), AllowAnonymous]
-        public JsonResult GetHistoricalIssues()
+        [HttpGet("/GetHistoricalissues"), AllowAnonymous]
+        public JsonResult GetHistoricalissues()
         {
-            List<Issues> issues = new List<Issues>();
+            List<issues> issues = new List<issues>();
 
-            foreach (var issue in _context.Issues)
+            foreach (var issue in _context.issues)
             {
                 if (issue.Closing != null)
                     issues.Add(issue);
@@ -213,15 +213,15 @@ namespace LogosAPI.Controllers
         [HttpPost("/SolvedIssue")]
         public JsonResult SolvedIssue(int id, DateTime date)
         {
-            var issue = _context.Issues.Find(id);
+            var issue = _context.issues.Find(id);
 
             if (issue == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).Closing = DateTime.UtcNow.AddHours(2).ToString("MM/dd/yyyy H:mm");
-            _context.Issues.Find(id).Solving = date.ToString("MM/dd/yyyy H:mm");
+            _context.issues.Find(id).Closing = DateTime.UtcNow.AddHours(2);
+            _context.issues.Find(id).Solving = date;
 
 
             _context.SaveChanges();
@@ -230,11 +230,11 @@ namespace LogosAPI.Controllers
 
         }
 
-      [HttpPost("/CreateIssue")]
+        [HttpPost("/CreateIssue")]
         public JsonResult CreateIssue(string AffectedSolutions, string Text, DateTime ETA)
         {
-            Issues issue = new Issues(AffectedSolutions, Text, ETA);
-            CreateEditIssues(issue);
+            issues issue = new issues(AffectedSolutions, Text, ETA);
+            CreateEditissues(issue);
 
             return new JsonResult(issue);
         }
@@ -243,14 +243,14 @@ namespace LogosAPI.Controllers
         [HttpDelete("/DeletePmAdmin")]
         public JsonResult DeletePmAdmin(int id)
         {
-            var pm = _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Remove(pm);
+            _context.plannedmaintenance.Remove(pm);
 
             _context.SaveChanges();
 
@@ -258,12 +258,12 @@ namespace LogosAPI.Controllers
         }
 
         [HttpPost("/CreatePm")]
-        public JsonResult CreatePm(string AffectedSolutions, string Text, DateTime s)
+        public JsonResult CreatePm(string AffectedSolutions, string Text, DateTime s, DateTime d)
         {
-             PlannedMaintenance pm = new PlannedMaintenance(AffectedSolutions, Text, s);
+            plannedmaintenance pm = new(AffectedSolutions, Text, s, d);
             CreateEditMaintenance(pm);
 
-            return new JsonResult(pm);
+            return new JsonResult(Ok(pm));
         }
 
 
@@ -271,11 +271,11 @@ namespace LogosAPI.Controllers
         [HttpGet("/GetHistoricalPmAdmin")]
         public JsonResult GetHistoricalPmAdmin()
         {
-            List<PlannedMaintenance> pms = new List<PlannedMaintenance>();
+            List<plannedmaintenance> pms = new List<plannedmaintenance>();
 
-            foreach (var pm in _context.PlannedMaintenance)
+            foreach (var pm in _context.plannedmaintenance)
             {
-                int Results = DateTime.Compare(DateTime.Parse(pm.scheduled), DateTime.Now.AddHours(2));
+                int Results = DateTime.Compare(pm.scheduled, DateTime.Now.AddHours(2));
 
                 if (Results < 0)
                     pms.Add(pm);
@@ -295,15 +295,15 @@ namespace LogosAPI.Controllers
         [HttpPost("/editTextIssue")]
         public JsonResult editTextIssue(int id, string t)
         {
-            var issue = _context.Issues.Find(id);
+            var issue = _context.issues.Find(id);
 
-            if(issue == null)
+            if (issue == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).Text = t;
-            issue = _context.Issues.Find(id);
+            _context.issues.Find(id).Text = t;
+            issue = _context.issues.Find(id);
 
             _context.SaveChanges();
 
@@ -314,15 +314,15 @@ namespace LogosAPI.Controllers
         [HttpPost("/editSolutionIssue")]
         public JsonResult editSolutionIssue(int id, string s)
         {
-            var issue = _context.Issues.Find(id);
+            var issue = _context.issues.Find(id);
 
             if (issue == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).AffectedSolutions = s;
-            issue = _context.Issues.Find(id);
+            _context.issues.Find(id).AffectedSolutions = s;
+            issue = _context.issues.Find(id);
 
             _context.SaveChanges();
 
@@ -331,17 +331,17 @@ namespace LogosAPI.Controllers
 
         //edit eta issue
         [HttpPost("/editEtaIssue")]
-        public JsonResult editEtaIssue(int id , DateTime date)
+        public JsonResult editEtaIssue(int id, DateTime date)
         {
-            var issue = _context.Issues.Find(id);
+            var issue = _context.issues.Find(id);
 
             if (issue == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.Issues.Find(id).ETA = date.ToString("MM/dd/yyyy H:mm");
-            issue = _context.Issues.Find(id);
+            _context.issues.Find(id).ETA = date;
+            issue = _context.issues.Find(id);
 
             _context.SaveChanges();
 
@@ -352,15 +352,15 @@ namespace LogosAPI.Controllers
         [HttpPost("/editTextPm")]
         public JsonResult editTextPm(int id, string t)
         {
-            var pm = _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Find(id).text = t;
-            pm = _context.PlannedMaintenance.Find(id);
+            _context.plannedmaintenance.Find(id).text = t;
+            pm = _context.plannedmaintenance.Find(id);
 
             _context.SaveChanges();
 
@@ -371,15 +371,15 @@ namespace LogosAPI.Controllers
         [HttpPost("/editSolutionPm")]
         public JsonResult editSolutionPm(int id, string t)
         {
-            var pm = _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Find(id).affectedSolutions = t;
-            pm = _context.PlannedMaintenance.Find(id);
+            _context.plannedmaintenance.Find(id).affectedSolutions = t;
+            pm = _context.plannedmaintenance.Find(id);
 
             _context.SaveChanges();
 
@@ -390,21 +390,21 @@ namespace LogosAPI.Controllers
         [HttpPost("/editScheduledPm")]
         public JsonResult editScheduledPm(int id, DateTime date)
         {
-            var pm = _context.PlannedMaintenance.Find(id);
+            var pm = _context.plannedmaintenance.Find(id);
 
             if (pm == null)
             {
                 return new JsonResult(NotFound());
             }
 
-            _context.PlannedMaintenance.Find(id).scheduled = date.ToString("MM/dd/yyyy H:mm");
-            pm = _context.PlannedMaintenance.Find(id);
+            _context.plannedmaintenance.Find(id).scheduled = date;
+            pm = _context.plannedmaintenance.Find(id);
 
             _context.SaveChanges();
 
             return new JsonResult(Ok(pm));
         }
 
-        
+
     }
 }
