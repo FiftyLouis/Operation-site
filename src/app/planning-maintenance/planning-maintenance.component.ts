@@ -9,6 +9,7 @@ dateofCreation:string;
 scheduled: string;
 affectedSolutions: string;
 text: string;
+duration : string;
 }
 
 @Component({
@@ -63,6 +64,10 @@ export class PlanningMaintenanceComponent implements OnInit {
 
  All(){
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
+    data.forEach( element => {
+      element.scheduled = this.reformateDate(element.scheduled);
+      element.dateofCreation = this.reformateDate(element.dateofCreation);
+    })
     this.PlannedMaintenance = data;
   })
  }
@@ -75,5 +80,19 @@ durationTime(scheduled: string):string{
     var h = result/(1000*60*60);
     var min = h - Math.floor(result/(1000*60*60));
     return Math.floor(h) + " h " + Math.floor(min*60) + " min"; 
+}
+
+reformateDate(s: string): string{
+  var date = s.split('T')[0];
+  var time = s.split('T')[1];
+  date = date.split('-').reverse().join('/');
+
+  var  hour = time.split(':')[0];
+  var minute = time.split(':')[1];
+  const t = [hour, minute];
+  time = t.join(':');
+
+  const element = [date, time];
+  return element.join(' ');
 }
 }

@@ -64,10 +64,13 @@ export class IssuesComponent implements OnInit {
    //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     var date = new Date().setHours(new Date().getHours()-int);
-    //date.setDate(date.getHours()-int);
-    //filter and set data chart
     console.log(date);
-    this.currentIssues = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
+    data = data.filter(element => Date.parse(element.date).valueOf() >= date.valueOf());
+    data.forEach( element => {
+      element.date = this.reformateDate(element.date);
+      element.eta = this.reformateDate(element.eta);
+    })
+    this.currentIssues = data;
   });
  }
 
@@ -75,6 +78,10 @@ export class IssuesComponent implements OnInit {
    //get data
   this.dataService.GetCurrentIssues().subscribe((data: issues[]) => {
     console.log(data);
+    data.forEach( element => {
+      element.date = this.reformateDate(element.date);
+      element.eta = this.reformateDate(element.eta);
+    })
     this.currentIssues = data;
   });
  }
@@ -89,6 +96,21 @@ openSearch(){
 searchClose(){
   this.searchText = '';
   this.toggleSearch = false;
+}
+
+
+reformateDate(s: string): string{
+  var date = s.split('T')[0];
+  var time = s.split('T')[1];
+  date = date.split('-').reverse().join('/');
+
+  var  hour = time.split(':')[0];
+  var minute = time.split(':')[1];
+  const t = [hour, minute];
+  time = t.join(':');
+
+  const element = [date, time];
+  return element.join(' ');
 }
 
 }

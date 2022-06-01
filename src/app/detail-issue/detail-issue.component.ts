@@ -47,8 +47,8 @@ export class DetailIssueComponent implements OnInit {
     this.dataService.GetIssues(this.id).subscribe( data => {
       console.log(data);
       this.issues = data.value;
-      this.issues.eta = this.reformatDate(this.issues.eta.split('T')[0]);
-      this.issues.date = this.reformatDate(this.issues.date.split('T')[0]);
+      this.issues.eta = this.reformatDate(this.issues.eta);
+      this.issues.date = this.reformatDate(this.issues.date);
     })
     if(localStorage.key(0)){
       this.login = true;
@@ -58,8 +58,17 @@ export class DetailIssueComponent implements OnInit {
   }
 
   reformatDate(s : string){
-    const result = s.split('-').reverse();
-    return result.join('/');
+    var date = s.split('T')[0];
+    var time = s.split('T')[1];
+    date = date.split('-').reverse().join('/');
+  
+    var  hour = time.split(':')[0];
+    var minute = time.split(':')[1];
+    const t = [hour, minute];
+    time = t.join(':');
+  
+    const element = [date, time];
+    return element.join(' ');
   }
 
   editTextIssue(){

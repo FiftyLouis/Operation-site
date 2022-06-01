@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private API = "http://localhost:49154";
+  private API = "http://localhost:49153";
   constructor(private httpClient: HttpClient) { }
 
   getAllIssues(): Observable<any> {
@@ -45,8 +45,8 @@ export class DataService {
     return this.httpClient.delete(url)
   }
 
-  CreatePm(a:string, t:string, s:string): Observable<any>{
-    const url = this.API +`/CreatePm?AffectedSolutions=${a}&Text=${t}&s=${s}`;
+  CreatePm(a:string, t:string, s:string, d:string): Observable<any>{
+    const url = this.API +`/CreatePm?AffectedSolutions=${a}&Text=${t}&s=${s}&d=${d}`;
     return this.httpClient.post(url, {});
   }
 

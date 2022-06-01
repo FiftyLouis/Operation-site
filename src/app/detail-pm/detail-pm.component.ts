@@ -10,6 +10,7 @@ interface PM{
   scheduled: string;
   affectedSolutions: string;
   text: string;
+  duration : string;
   }
 @Component({
   selector: 'app-detail-pm',
@@ -45,8 +46,8 @@ export class DetailPmComponent implements OnInit {
     this.dataService.GetPm(this.id).subscribe(data => {
       console.log(data);
       this.PM = data.value;
-      this.PM.scheduled = this.reformatDate(this.PM.scheduled.split('T')[0]);
-      this.PM.dateofCreation = this.reformatDate(this.PM.dateofCreation.split('T')[0]);
+      this.PM.scheduled = this.reformatDate(this.PM.scheduled);
+      this.PM.dateofCreation = this.reformatDate(this.PM.dateofCreation);
     });
     if(localStorage.key(0)){
       this.login = true;
@@ -83,9 +84,18 @@ export class DetailPmComponent implements OnInit {
     window.location.reload();
   }
 
-  reformatDate(s : string){
-    const result = s.split('-').reverse();
-    return result.join('/');
+  reformatDate(s : string): string{
+    var date = s.split('T')[0];
+    var time = s.split('T')[1];
+    date = date.split('-').reverse().join('/');
+  
+    var  hour = time.split(':')[0];
+    var minute = time.split(':')[1];
+    const t = [hour, minute];
+    time = t.join(':');
+  
+    const element = [date, time];
+    return element.join(' ');
   }
 
   deletePM(){

@@ -12,6 +12,7 @@ export class FormMaintenanceComponent implements OnInit {
     AffectedSolutions: new FormControl(),
     Text: new FormControl(),
     Scheduled: new FormControl(),
+    duration : new FormControl(),
   })
 
   constructor(private data : DataService) { }
@@ -22,7 +23,7 @@ export class FormMaintenanceComponent implements OnInit {
   save(){
     const val = this.PmForm.value;
     console.log(val);
-    this.data.CreatePm(val.AffectedSolutions, val.Text, val.Scheduled).subscribe(data => {
+    this.data.CreatePm(val.AffectedSolutions, val.Text, val.Scheduled, val.duration).subscribe(data => {
       console.log(data);
     });
     window.location.href="http://localhost:4200/planningMaintenance";
