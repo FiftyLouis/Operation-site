@@ -52,13 +52,13 @@ export class PlanningMaintenanceComponent implements OnInit {
 
  TodayPm(int:number){
   this.dataService.GetPmScheduledDate().subscribe((data : PM[])=> {
-    this.PlannedMaintenance = data.filter(element => {
-      var d1 = new Date(element.scheduled);
-      var d2 = new Date(Date.now());
-      var result = d1.valueOf() - d2.valueOf();
-      var h = Math.floor(result/(1000*60*60));
-      return h < int
+    var date = new Date().setHours(new Date().getHours()-int);
+    data = data.filter(element => Date.parse(element.dateofCreation).valueOf() >= date.valueOf());
+    data.forEach( element => {
+      element.scheduled = this.reformateDate(element.scheduled);
+      element.dateofCreation = this.reformateDate(element.dateofCreation);
     });
+    this.PlannedMaintenance = data;
   });
  }
 
