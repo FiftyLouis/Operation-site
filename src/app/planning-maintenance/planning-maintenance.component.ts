@@ -41,7 +41,7 @@ export class PlanningMaintenanceComponent implements OnInit {
     this.dataService.DeletePmAdmin(this.idRmv).subscribe((data : PM) => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/planningMaintenance"
+    window.location.href="planningMaintenance"
   }
 
   openModal(template: TemplateRef<any>, id : number) {

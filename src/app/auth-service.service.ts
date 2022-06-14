@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
+import { environment} from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private API = "http://localhost:49153";
+  private API = environment.apiUrl;
 
   constructor(private http: HttpClient, private router: Router, private dialog : MatDialog) { 
   }
@@ -23,7 +24,7 @@ export class AuthServiceService {
 
 logout() {
   localStorage.removeItem('currentUser');
-  window.location.href="http://localhost:4200"
+  window.location.href="";
 }
 
 }

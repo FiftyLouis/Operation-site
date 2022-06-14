@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  apiUrl: window["env"]["apiUrl"] || "https://operationapi.logos.dk",
+  production: true,
 };

@@ -104,7 +104,7 @@ export class DetailIssueComponent implements OnInit {
   this.dataService.DeleteIssues(this.id).subscribe( data => {
     console.log(data);
   });
-  window.location.href="http://localhost:4200/currentIssues";
+  window.location.href="currentIssues";
  }
 
 }

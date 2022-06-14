@@ -52,7 +52,7 @@ export class IssuesComponent implements OnInit {
     this.dataService.SolvedIssue(this.idSolved, val.date).subscribe( (data : issues) => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/currentIssues";
+    window.location.href="currentIssues";
   }
 
   openModal(template: TemplateRef<any>, id : number) {

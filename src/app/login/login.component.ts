@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     })).subscribe(data => {
       console.log(data)
       localStorage.setItem('currentUser', data);
-      window.location.href="http://localhost:4200"
+      window.location.href="";
     });
   }
   

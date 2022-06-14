@@ -26,6 +26,6 @@ export class FormIssuesComponent implements OnInit {
     this.data.CreateIssue(val.AffectedSolutions, val.Text, val.eta).subscribe(data => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/currentIssues"
+    window.location.href="currentIssues"
   }
 }

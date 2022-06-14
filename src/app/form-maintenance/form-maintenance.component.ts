@@ -26,7 +26,7 @@ export class FormMaintenanceComponent implements OnInit {
     this.data.CreatePm(val.AffectedSolutions, val.Text, val.Scheduled, val.duration).subscribe(data => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/planningMaintenance";
+    window.location.href="planningMaintenance";
   }
 
 }

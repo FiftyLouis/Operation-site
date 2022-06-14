@@ -102,6 +102,6 @@ export class DetailPmComponent implements OnInit {
     this.dataService.DeletePmAdmin(this.id).subscribe( data => {
       console.log(data);
     });
-    window.location.href="http://localhost:4200/planningMaintenance";
+    window.location.href="planningMaintenance";
   }
 }
