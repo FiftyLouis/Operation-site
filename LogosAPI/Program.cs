@@ -3,6 +3,8 @@ using LogosAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,24 +26,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false,
         };
     });
-
+builder.Services.AddDbContext<ApiContext>();
 var cors = "cors";
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(cors, builder =>
     {
-        builder.AllowAnyMethod().AllowAnyHeader();
+        builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
     });
 });
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
