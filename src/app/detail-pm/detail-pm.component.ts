@@ -104,4 +104,13 @@ export class DetailPmComponent implements OnInit {
     });
     window.location.href="planningMaintenance";
   }
+
+  modifDuration(){
+    const val = this.inputForm.value;
+    this.dataService.modifDuration(this.id, val).subscribe(data => {
+      console.log(data);
+    });
+    window.location.reload();
+  }
+
 }

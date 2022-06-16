@@ -99,4 +99,9 @@ export class DataService {
     const url = this.API +`/deleteIssues?id=${id}`;
     return this.httpClient.delete(url);
   }
+
+  modifDuration(id:number, text:string): Observable<any>{
+    const url = this.API +`/modifDuration?id=${id}&date=${text}`;
+    return this.httpClient.post(url, {}); 
+  }
 }

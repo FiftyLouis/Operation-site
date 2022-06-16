@@ -43,6 +43,10 @@
     </div>
 
     <div class="col-md-3 col-sm-6 mb-4">
+      <button type="button" class="btn btn-primary btn-lg btn-block" (click)="openModal(template5)">Change Duration</button>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
       <button type="button" class="btn btn-danger btn-lg btn-block" (click)="openModal(template4)">Delete</button>
     </div>
 
@@ -120,3 +124,21 @@
     </div>
   </div>
   </ng-template>
+
+
+  <ng-template #template5>
+    <div class="modal-content rounded-5 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h2 class="fw-bold mb-0">change duration here</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef.hide()"></button>
+      </div>
+      <div class="modal-body p-5 pt-0">
+        <form [formGroup]="inputForm" (ngSubmit)="modifDuration()">
+          <div class="form-floating mb-3">
+            <input class="form-control" type="time" id="dateTime" name="duration" formControlName="input">
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary">save change</button>
+        </form>
+      </div>
+    </div> 
+  </ng-template>         
