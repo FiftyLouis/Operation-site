@@ -2,7 +2,6 @@
     window["env"] = window["env"] || {};
   
     // Environment variables
-    window["env"]["apiUrl"] = "http://localhost:8080";
-    //https://operationapi.logos.dk
+    window["env"]["apiUrl"] = "https://operationapi.logos.dk";
 
   })(this);
